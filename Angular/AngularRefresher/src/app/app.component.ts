@@ -7,9 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'AngularRefresher';
-public  persons = ["Max", "Manuel", "Anna"];
-personAdded(name : string)
-{
-  this.persons.push(name);
-}
+// personAdded(name : string)
+// {
+//   this.persons.push(name);
+// }
 }
