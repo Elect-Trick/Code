@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "UdemyApp-BookingSystem",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
