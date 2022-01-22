@@ -1,7 +1,13 @@
+/* eslint-disable @typescript-eslint/prefer-for-of */
+import { DomSanitizer } from '@angular/platform-browser';
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, LoadingController, SegmentChangeEventDetail } from '@ionic/angular';
+import {
+  AlertController,
+  LoadingController,
+  SegmentChangeEventDetail,
+} from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Place } from '../places.model';
@@ -16,50 +22,45 @@ export class DiscoverPage implements OnInit, OnDestroy {
   public loadedPlaces: Place[];
   private placesSub: Subscription;
   public bookablePlaces: Place[] = [];
+  isLoading: boolean;
   constructor(
     private loadingCtrl: LoadingController,
     private placesService: PlacesService,
     private authServ: AuthService,
     private alertCtrl: AlertController,
-    private router: Router
+    private router: Router,
+    private sanitizer: DomSanitizer
   ) {}
 
-  ngOnInit() {
-    //  this.placesService.fetchPlaces().subscribe(response =>{
-    //   this.presentLoadingController();
-    //   this.loadedPlaces = response;
-    //   setTimeout(()=>{
-    //     this.bookablePlaces = this.loadedPlaces;
-    //     if(this.loadedPlaces)
-    //   {
-    //     this.loadingCtrl.dismiss();
-    //   }
-    //   },1500);
-    //    });
-  }
+  ngOnInit() {}
 
   ionViewWillEnter() {
-    this.placesSub = this.placesService.fetchPlaces().subscribe((response) => {
-      this.presentLoadingController();
-      setTimeout(()=>{
+    this.isLoading = true;
+    this.presentLoadingController();
+    this.placesSub = this.placesService.fetchPlaces().subscribe(
+      (response) => {
         this.loadedPlaces = response;
         this.bookablePlaces = this.loadedPlaces;
-        if(this.loadedPlaces)
-        {
+        for (let index = 0; index < this.bookablePlaces.length; index++) {
+          this.bookablePlaces[index].imageUrl =
+            'data:image/jpg;base64,' +
+            (
+              this.sanitizer.bypassSecurityTrustResourceUrl(
+                this.bookablePlaces[index].imageUrl
+              ) as any
+            ).changingThisBreaksApplicationSecurity;
+          this.isLoading = false;
+        }
+        if (this.bookablePlaces) {
           this.loadingCtrl.dismiss();
         }
-
-      },1000);
-    },error =>{
-      this.presentAlertController();
-
-    });
+      },
+      (error) => {
+        this.presentAlertController();
+      }
+    );
   }
-  ngOnDestroy(): void {
-    if (this.placesSub) {
-      this.placesSub.unsubscribe();
-    }
-  }
+
   public selectedSegment(event: CustomEvent) {
     if (event.detail.value === 'all') {
       this.bookablePlaces = this.loadedPlaces;
@@ -67,9 +68,7 @@ export class DiscoverPage implements OnInit, OnDestroy {
       this.bookablePlaces = this.bookablePlaces.filter(
         (z) => z.id === this.authServ.getUserId
       );
-      console.log(this.bookablePlaces.length);
     }
-    console.log(event.detail);
   }
   async presentLoadingController() {
     const loading = await this.loadingCtrl.create({
@@ -95,5 +94,11 @@ export class DiscoverPage implements OnInit, OnDestroy {
       ],
     });
     await loading.present();
+  }
+
+  ngOnDestroy(): void {
+    if (this.placesSub) {
+      this.placesSub.unsubscribe();
+    }
   }
 }

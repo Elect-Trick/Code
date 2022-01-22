@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/prefer-for-of */
+/* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/member-ordering */
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import {
   IonItemSliding,
   LoadingController,
@@ -15,15 +18,22 @@ import { PlacesService } from '../places.service';
   styleUrls: ['./offers.page.scss'],
 })
 export class OffersPage implements OnInit, OnDestroy {
+  currVerifiedLoanOfficerPhoto: string;
   constructor(
-    private offersService: PlacesService,
+    public offersService: PlacesService,
     private navCtrl: NavController,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private santizer: DomSanitizer
   ) {}
+  testImage: string;
   isLoading: boolean;
-  public offers: Place[] = [];
+  @Output() offers: Place[] = [];
   private placesSub: Subscription;
-  ngOnInit() {}
+
+
+  ngOnInit() {
+
+  }
   ngOnDestroy(): void {
     if (this.placesSub) {
       this.placesSub.unsubscribe();
@@ -31,26 +41,30 @@ export class OffersPage implements OnInit, OnDestroy {
   }
   ionViewWillEnter() {
     this.isLoading = true;
-
-    this.offersService.fetchPlaces().subscribe((response) => {
-      this.presentLoadingController();
-
-      setTimeout(() => {
-
-        this.offers = response;
-
+    this.presentLoadingController();
+  this.placesSub =   this.offersService.fetchPlaces().subscribe((response) => {
+      this.offers = response;
+      for (let index = 0; index < this.offers.length; index++) {
+        this.offers[index].imageUrl =
+          'data:image/jpg;base64,' +
+          (
+            this.santizer.bypassSecurityTrustResourceUrl(
+              this.offers[index].imageUrl
+            ) as any
+          ).changingThisBreaksApplicationSecurity;
+      }
         this.isLoading = false;
-      }, 1500);
+        if(this.offers != null || this.offers !== undefined)
+        {this.loadingCtrl.dismiss();}
+
 
     });
-
-    // console.log(this.offers);
   }
   navigate() {}
   async presentLoadingController() {
     const loading = await this.loadingCtrl.create({
-      message: 'Loading Places ....',
-      duration: 1750,
+      message: 'Loading Offers ....',
+      duration: 5000,
       backdropDismiss: false,
     });
     await loading.present();

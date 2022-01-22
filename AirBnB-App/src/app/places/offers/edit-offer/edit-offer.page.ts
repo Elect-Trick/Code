@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/dot-notation */
+/* eslint-disable @typescript-eslint/no-shadow */
 import { OfferBookingsPage } from './../offer-bookings/offer-bookings.page';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -52,33 +54,43 @@ export class EditOfferPage implements OnInit, OnDestroy {
 
     if (this.placesSub) {
       this.placesSub.unsubscribe();
-    }
-    if (this.placeSub) {
-      this.placeSub.unsubscribe();
+    } if (this.placeSub) {
+      this.placesSub.unsubscribe();
     }
   }
   ionViewWillEnter() {
-    this.placeService.fetchPlaces().subscribe(
+    this.isLoading = true;
+    this.presentLoadingController();
+  this.placeSub=  this.placeService.fetchPlaces().subscribe(
       (response) => {
         this.loadedPlaces = response;
-        this.place = this.loadedPlaces.find((z) => z.id === this.place.id);
+        this.place = response.find((z) => z.id === this.place.id);
       },
       (error) => {
-this.presentAlertController();      }
+        this.presentAlertController();
+      }
     );
+    this.isLoading = false;
+
   }
   ngOnInit() {
+
     this.routeSub = this.route.paramMap.subscribe((paraMap) => {
       if (!paraMap.has('placeId')) {
-        this.navCtrl.navigateBack('/place/offers');
+        this.router.navigate(['/place/offers']);
       }
 
       this.placesSub = this.placeService
         .getPlace(paraMap.get('placeId'))
         .subscribe(
           (response) => {
+
+            try {
+
+            } catch (error) {
+
+            }
             this.place = response;
-            console.log('PlaceId is', this.place.id);
             this.form = new FormGroup({
               title: new FormControl(this.place.title, {
                 updateOn: 'change',
@@ -90,7 +102,9 @@ this.presentAlertController();      }
               }),
             });
           },
-          (error) => {this.presentAlertController();}
+          (error) => {
+            this.presentAlertController();
+          }
         );
     });
   }
@@ -117,7 +131,7 @@ this.presentAlertController();      }
   }
   async presentLoadingController() {
     const loading = await this.loadingCtrl.create({
-      message: 'Booking your spot....',
+      message: 'Preparing....',
       duration: 1500,
       backdropDismiss: false,
     });

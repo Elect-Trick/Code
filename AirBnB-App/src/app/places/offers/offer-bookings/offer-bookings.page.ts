@@ -11,7 +11,7 @@ import { PlacesService } from '../../places.service';
   styleUrls: ['./offer-bookings.page.scss'],
 })
 export class OfferBookingsPage implements OnInit, OnDestroy {
-  public place: Place={
+  public place: Place = {
     id: '',
     title: '',
     description: '',
@@ -19,7 +19,7 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
     price: 0,
     startDate: undefined,
     endDate: undefined,
-    userID: ''
+    userID: '',
   };
   routeSub: Subscription;
   placeSub: Subscription;
@@ -37,16 +37,16 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
         alert('in the sub');
         return;
       }
-      // this.place = this.placesServ.places.find(
-      //   (_place) => _place.id === respone.get('placeId')
-      // );
       this.placeSub = this.placesServ
         .getPlace(respone.get('placeId'))
         .subscribe((response) => {
           this.place = response;
         });
-      console.log('Place obtained', this.place);
     });
+
+  }
+  ionViewWillEnter() {
+
   }
   ngOnDestroy(): void {
     if (this.routeSub) {

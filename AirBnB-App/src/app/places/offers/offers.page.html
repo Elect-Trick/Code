@@ -20,13 +20,13 @@
 </ion-footer>
 
 
-<ion-content>
+<ion-content >
   <ion-grid class="ion-padding-top" *ngIf="isLoading===false">
     <ion-row >
       <ion-col size-lg="8" offset-lg="2">
         <ion-list *ngIf="offers.length>0" >
           <!-- <p *ngIf="">No offers found</p> -->
-          <ion-item-sliding *ngFor="let x of offers" #slidingItem>
+          <ion-item-sliding  *ngFor="let x of offers " #slidingItem>
 
           <ion-item  [routerLink]="['./',x.id]">
             <ion-thumbnail slot="start">
@@ -49,4 +49,6 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+
 </ion-content>

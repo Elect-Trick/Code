@@ -21,7 +21,7 @@ const routes: Routes = [
       import('./bookings/bookings.module').then((m) => m.BookingsPageModule),
       canLoad: [AuthGuard]
       // These routes are protected and so are their child components
-  },
+  }
 ];
 
 @NgModule({

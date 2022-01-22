@@ -1,3 +1,4 @@
+import { DomSanitizer } from '@angular/platform-browser';
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
@@ -21,7 +22,8 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
     private modalCtrl: ModalController,
     private placeServ: PlacesService,
     private actSheetCtrl: ActionSheetController,
-    private authService: AuthService
+    private authService: AuthService,
+    private sanitizer: DomSanitizer
   ) {}
   public isBookable: boolean;
 public place: Place={
@@ -51,6 +53,8 @@ ngOnDestroy(): void {
       }
       this.placeSub= this.placeServ.getPlace(paraMap.get('placeId')).subscribe(response =>{
          this.place = response;
+         this.place.imageUrl =  'data:image/jpg;base64,' + (this.sanitizer.bypassSecurityTrustResourceUrl(this.place.imageUrl)as any
+         ).changingThisBreaksApplicationSecurity;
          this.isBookable = this.place.userID !== this.authService.getUserId;
        });
     });
@@ -69,7 +73,7 @@ ngOnDestroy(): void {
       componentProps: { selectedPlace: this.place },
     });
      modal.present();
-     console.log((await modal.onDidDismiss()));
+    //  console.log((await modal.onDidDismiss()));
 
   }
 

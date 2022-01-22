@@ -1,54 +1,45 @@
+/* eslint-disable @typescript-eslint/member-ordering */
+/* eslint-disable quote-props */
+/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable arrow-body-style */
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, zip } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { take, map, tap, delay, find, switchMap } from 'rxjs/operators';
 import { Place } from './places.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlacesService {
+  public firebaseApp: any;
   public generatedId: string;
-  public places = new BehaviorSubject<Place[]>([
-    // new Place(
-    //   'p1',
-    //   'Manhattan Mansion',
-    //   'In the heart of New York City.',
-    //   'https://lonelyplanetimages.imgix.net/mastheads/GettyImages-538096543_medium.jpg?sharp=10&vib=20&w=1200',
-    //   149.99,
-    //   new Date(),
-    //   new Date(),
-    //   'abc'
-    // ),
-    // new Place(
-    //   'p2',
-    //   'L/Amour Toujours',
-    //   'A romantic place in Paris!',
-    //   'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Paris_Night.jpg/1024px-Paris_Night.jpg',
-    //   189.99,
-    //   new Date(),
-    //   new Date(),
-    //   'abc'
-    // ),
-    // new Place(
-    //   'p3',
-    //   'The Foggy Palace',
-    //   'Not your average city trip!',
-    //   'https://upload.wikimedia.org/wikipedia/commons/0/01/San_Francisco_with_two_bridges_and_the_fog.jpg',
-    //   99.99,
-    //   new Date(),
-    //   new Date(),
-    //   'abc'
-    // ),
-  ]);
+  places = new BehaviorSubject<Place[]>([]);
   constructor(private httpClient: HttpClient) {}
   public getPlaces() {
     return this.places.asObservable();
   }
+
+  // postImages(images: any){
+
+  //   // const file = new File(images, );
+  //   const storageRef = firebase.storage().ref().child(`images/${images}.jpg`);
+  // //  const catRef = storageRef.child(`C:/Users/Njabulo Majenje/Pictures/Giphs/${images}`);
+  // storageRef.put(images).then(snapshot=>{
+  //   console.log('File Uploaded', snapshot);
+  // });
+  // const url = storageRef.getDownloadURL();
+  // console.log('URL',url);
+
+  //   // return this.httpClient.post('http://royalteas.co.za/royalkgg_App',images);
+  // }
+
+  public testFire() {}
 
   public getPlace(placeId: string) {
     // This returns a copy of the place so we don't alter the original one.
@@ -70,12 +61,6 @@ export class PlacesService {
           );
         })
       );
-
-    // return this.places.pipe(
-    //   take(1),
-    //   map((response) => {
-    //     return { ...response.find((z) => z.id === placeId) };
-    //   }));
   }
   fetchPlaces() {
     return this.httpClient
@@ -103,6 +88,7 @@ export class PlacesService {
           }
           return places;
         }),
+        take(1),
         tap((response) => {
           this.places.next(response);
         })
@@ -129,20 +115,11 @@ export class PlacesService {
           place.id = this.generatedId;
           this.places.next(places.concat(place));
         })
-        // console.log('http response is',response);
       );
-    // return this.places.pipe(
-    //   take(1),
-    //   delay(1000),
-    //   tap((places) => {
-    //     this.places.next(places.concat(place));
-    //   })
-    // );
   }
 
   public updateOffer(place: Place) {
     let updatedPlace: Place[];
-
 
     return this.places.pipe(
       take(1),
@@ -162,11 +139,10 @@ export class PlacesService {
           place.userID
         );
 
-        return this.httpClient
-          .put<PlaceData>(
-            `https://udemyairbnb-default-rtdb.firebaseio.com/offered-places/${place.id}.json`,
-            { ...updatedPlace[placeIndex], id: null }
-          );
+        return this.httpClient.put<PlaceData>(
+          `https://udemyairbnb-default-rtdb.firebaseio.com/offered-places/${place.id}.json`,
+          { ...updatedPlace[placeIndex], id: null }
+        );
       })
     );
   }
