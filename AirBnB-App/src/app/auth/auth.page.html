@@ -6,7 +6,7 @@
 <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
 
 <ion-content>
-  <form #f="ngForm" (ngSubmit)="submitForm(f)">
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
     <ion-grid>
       <ion-row>
         <ion-col offset="0.7" offset-md="1" offset-sm="1" size="10">
@@ -14,10 +14,11 @@
             <ion-label position="floating" class="ion-text-center"
               >E-mail</ion-label
             >
-            <ion-input #emailCtrl="ngModel" required type="e-mail" ngModel name="e-mail"></ion-input>
-            <ion-item lines="none" *ngIf="emailCtrl.touched && emailCtrl.invalid">
-              <ion-label> Please enter an E-mail</ion-label>
-            </ion-item>
+            <ion-input
+              formControlName="email"
+              required
+              type="e-mail"
+            ></ion-input>
           </ion-item>
         </ion-col>
         <ion-col offset="0.7" offset-md="1" offset-sm="1" size="10">
@@ -29,14 +30,8 @@
               required
               minlength="6"
               type="password"
-              ngModel
-              name="password"
-              #passwordCtrl="ngModel"
+              formControlName="password"
             ></ion-input>
-            <ion-item lines="none" *ngIf="passwordCtrl.touched && passwordCtrl.invalid">
-              <ion-label> Please enter a Password</ion-label>
-            </ion-item>
-
           </ion-item>
         </ion-col>
         <ion-col offset="4.2" offset-md="5.6" offset-sm="5.3">
@@ -45,7 +40,12 @@
           >
         </ion-col>
       </ion-row>
-
+      <br />
+      <ion-row>
+        <ion-col offset="3.5" offset-md="5.3" offset-lg="5.4">
+          <ion-label (click)="isNewUser()"> New User? Click here </ion-label>
+        </ion-col>
+      </ion-row>
     </ion-grid>
   </form>
 </ion-content>

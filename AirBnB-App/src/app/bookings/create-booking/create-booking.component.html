@@ -62,7 +62,6 @@
             </ion-item>
             <ion-datetime
               (ionChange)="startDateChanged($event)"
-              [presentation]="date"
               *ngIf="startDateSelected"
               formControlName="startDate"
               [(ngModel)]="formatedStartDate"
@@ -79,7 +78,6 @@
             </ion-item>
             <ion-datetime
               (ionChange)="endDateChanged($event)"
-              [presentation]="date"
               *ngIf="endDateSelected"
               formControlName="endDate"
               [min]="formatedStartDate"

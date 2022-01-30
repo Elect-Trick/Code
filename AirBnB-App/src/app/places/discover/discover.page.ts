@@ -61,7 +61,7 @@ export class DiscoverPage implements OnInit, OnDestroy {
     );
   }
 
-  public selectedSegment(event: CustomEvent) {
+  public selectedSegment(event) {
     if (event.detail.value === 'all') {
       this.bookablePlaces = this.loadedPlaces;
     } else {
