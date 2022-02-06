@@ -19,15 +19,16 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             // Dependency Injection 
-
+            // Ordering doesn't matter here but does in the Configure method
             services.AddControllers();
+            services.AddCors();
 
             // Lamda expressions allows to pass parameters as expresions, brings convenience. 
             services.AddDbContext<DataContext>(options =>
             {
 
                 //    We need to specify the type of function or execution we want to perform on the DB 
-                    options.UseSqlite(Config.GetConnectionString("DefaultConnection"));
+                options.UseSqlite(Config.GetConnectionString("DefaultConnection"));
             });
             services.AddSwaggerGen(c =>
             {
@@ -44,11 +45,9 @@ namespace API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
             }
-
+            app.UseCors(corsPolicy => corsPolicy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

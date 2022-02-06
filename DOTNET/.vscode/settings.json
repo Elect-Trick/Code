@@ -3,5 +3,6 @@
         "**/bin": true,
         "**/obj": true
     },
-    "explorer.compactFolders": false
+    "explorer.compactFolders": false,
+    "angular.enable-strict-mode-prompt": false
 }
