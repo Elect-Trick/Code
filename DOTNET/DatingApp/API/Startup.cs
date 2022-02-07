@@ -1,10 +1,4 @@
 using Microsoft.OpenApi.Models;
-using Microsoft.EntityFrameworkCore.Sqlite;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
-using API.Services;
-using API.Interfaces;
-using API.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -28,8 +22,9 @@ namespace API
             // Dependency Injection 
 
             // In my understanding this is a lifecycle of our http requests
-            services.AddApplicationServices(Config);
             services.AddIdentityServices(Config);
+
+            services.AddApplicationServices(Config);
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
@@ -68,8 +63,8 @@ namespace API
             }
             app.UseCors(corsPolicy => corsPolicy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
             app.UseHttpsRedirection();
+            // app.UseAuthentication();
             app.UseRouting();
-            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

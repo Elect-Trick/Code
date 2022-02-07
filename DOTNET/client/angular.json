@@ -73,17 +73,12 @@
             "sslKey": "./client/ssl/server.key",
             "ssl": true,
             "browserTarget": "test:build"
-
           },
           "configurations": {
-
-
             "production": {
               "browserTarget": "client:build:production"
             },
             "development": {
-
-
               "browserTarget": "client:build:development"
             }
           },
