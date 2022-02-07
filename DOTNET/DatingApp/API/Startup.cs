@@ -2,7 +2,14 @@ using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using API.Services;
+using API.Interfaces;
 using API.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using API.Extensions;
+
 namespace API
 {
     public class Startup
@@ -19,17 +26,31 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             // Dependency Injection 
+
+            // In my understanding this is a lifecycle of our http requests
+            services.AddApplicationServices(Config);
+            services.AddIdentityServices(Config);
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+
+                    ValidateIssuerSigningKey = true,
+                    // The Issuer will be our API 
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config["TokenKey"])),
+                    ValidateIssuer = false,
+                    // Audience is our angular app
+                    ValidateAudience = false
+                };
+            }
+
+            );
             // Ordering doesn't matter here but does in the Configure method
             services.AddControllers();
             services.AddCors();
 
-            // Lamda expressions allows to pass parameters as expresions, brings convenience. 
-            services.AddDbContext<DataContext>(options =>
-            {
 
-                //    We need to specify the type of function or execution we want to perform on the DB 
-                options.UseSqlite(Config.GetConnectionString("DefaultConnection"));
-            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
@@ -48,6 +69,7 @@ namespace API
             app.UseCors(corsPolicy => corsPolicy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
