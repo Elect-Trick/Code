@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -28,7 +29,7 @@ export class RegisterComponent implements OnInit {
 
   });
 
-  constructor(private accountService: AccountService) {
+  constructor(private accountService: AccountService, private toastr: ToastrService) {
 
 
   }
@@ -45,6 +46,7 @@ export class RegisterComponent implements OnInit {
         this.cancel();
       },error =>{
         console.log(error);
+        this.toastr.error(error.error);
       })
     }
     else{

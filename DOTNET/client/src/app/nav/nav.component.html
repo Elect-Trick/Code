@@ -16,7 +16,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul
-        *ngIf="accountService.currentUser$ | async"
+        *ngIf="(accountService.currentUser$ | async)"
         class="navbar-nav me-auto mb-2 mb-md-0"
       >
         <li class="nav-item">
@@ -24,12 +24,11 @@
             class="nav-link active"
             aria-current="page"
             routerLink="/members"
-            routerLinkActive="active"
             >Matches</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/lists" routerLinkActive="active"
+          <a class="nav-link" routerLink="/lists"
             >Lists</a
           >
         </li>
@@ -74,7 +73,7 @@
         name="password"
         [(ngModel)]="model.password"
       />
-      <button class="btn btn-outline-success" type="submit">Login</button>
+      <button  class="btn btn-outline-success" type="submit">Login</button>
     </form>
   </div>
 </nav>
