@@ -15,6 +15,8 @@
       <!-- <span class="navbar-toggler-icon"></span> -->
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ng-container>
+
       <ul
         *ngIf="(accountService.currentUser$ | async)"
         class="navbar-nav me-auto mb-2 mb-md-0"
@@ -38,7 +40,12 @@
           >
         </li>
       </ul>
-
+    </ng-container>
+    <li class="nav-item" *ngIf="!(accountService.currentUser$ | async)">
+      <a class="nav-link" routerLink="/errors" routerLinkActive="active"
+        >Errors</a
+      >
+    </li>
       <div
         class="dropdown"
         *ngIf="accountService.currentUser$ | async"
