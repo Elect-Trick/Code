@@ -3,6 +3,9 @@ using API.Middleware;
 using API.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using API.Helpers;
+using API.Interfaces;
+using API.Data;
 
 namespace API
 {
@@ -24,6 +27,7 @@ namespace API
             // In my understanding this is a lifecycle of our http requests
             services.AddIdentityServices(Config);
             services.AddApplicationServices(Config);
+            // services.AddScoped<IUserRepository, UserRepository>();
             // services.AddAuthentication(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             // {
             //     options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters

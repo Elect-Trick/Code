@@ -27,11 +27,11 @@ namespace API.Entities
         public string Country { get; set; }
         public ICollection<Photo> Photos { get; set; }
 
-        public int getAge()
-        {
-            return DateTimeExtensions.CalculateAge(DateOfBirth);
+        // public int getAge()
+        // {
+        //     return DateTimeExtensions.CalculateAge(DateOfBirth);
 
-        }
+        // }
 
 
     }

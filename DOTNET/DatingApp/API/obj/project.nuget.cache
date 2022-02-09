@@ -1,14 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "yV82/JlgKoKCgXZFSDLv9FdlDGhidoXpc8zqTk2y32uYAYsQiPkhWA+tjQHJQZlVZauH5v4ElNDmIgsmDveYzw==",
+  "dgSpecHash": "z/2dbzIBq519nSGJILNJL6xyoC5od6RiG9ozop22BZ7PR3W//0o13t/YGSTc/l4DW15cDklOSd4Vn0beC3Me6g==",
   "success": true,
   "projectFilePath": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Njabulo Majenje\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
+    "C:\\Users\\Njabulo Majenje\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\Njabulo Majenje\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Njabulo Majenje\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.1\\microsoft.aspnetcore.authentication.jwtbearer.6.0.1.nupkg.sha512",
     "C:\\Users\\Njabulo Majenje\\.nuget\\packages\\microsoft.aspnetcore.authorization\\6.0.1\\microsoft.aspnetcore.authorization.6.0.1.nupkg.sha512",
     "C:\\Users\\Njabulo Majenje\\.nuget\\packages\\microsoft.aspnetcore.metadata\\6.0.1\\microsoft.aspnetcore.metadata.6.0.1.nupkg.sha512",
-    "C:\\Users\\Njabulo Majenje\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\Njabulo Majenje\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Njabulo Majenje\\.nuget\\packages\\microsoft.data.sqlite.core\\6.0.1\\microsoft.data.sqlite.core.6.0.1.nupkg.sha512",
     "C:\\Users\\Njabulo Majenje\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.1\\microsoft.entityframeworkcore.6.0.1.nupkg.sha512",
     "C:\\Users\\Njabulo Majenje\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.1\\microsoft.entityframeworkcore.abstractions.6.0.1.nupkg.sha512",

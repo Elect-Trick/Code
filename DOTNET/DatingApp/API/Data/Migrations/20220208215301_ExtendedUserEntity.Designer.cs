@@ -107,7 +107,6 @@ namespace API.Data.Migrations
                 {
                     b.Navigation("Photos");
                 });
-#pragma warning restore 612, 618
         }
     }
 }

@@ -61,3 +61,5 @@ C:\Users\Njabulo Majenje\Documents\Code\DOTNET\DatingApp\API\bin\Debug\net6.0\Mi
 C:\Users\Njabulo Majenje\Documents\Code\DOTNET\DatingApp\API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
 C:\Users\Njabulo Majenje\Documents\Code\DOTNET\DatingApp\API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\Njabulo Majenje\Documents\Code\DOTNET\DatingApp\API\bin\Debug\net6.0\Data\UserSeedData.json
+C:\Users\Njabulo Majenje\Documents\Code\DOTNET\DatingApp\API\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\Njabulo Majenje\Documents\Code\DOTNET\DatingApp\API\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
