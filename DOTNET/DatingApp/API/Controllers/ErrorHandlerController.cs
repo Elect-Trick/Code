@@ -1,6 +1,5 @@
 using API.Data;
 using Microsoft.AspNetCore.Mvc;
-using API.Entities;
 
 namespace API.Controllers
 {

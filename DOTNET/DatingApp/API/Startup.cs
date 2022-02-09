@@ -1,9 +1,8 @@
 using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using API.Middleware;
+using API.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using API.Extensions;
-using API.Middleware;
 
 namespace API
 {
@@ -25,27 +24,24 @@ namespace API
             // In my understanding this is a lifecycle of our http requests
             services.AddIdentityServices(Config);
             services.AddApplicationServices(Config);
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-                {
+            // services.AddAuthentication(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            // {
+            //     options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+            //     {
 
-                    ValidateIssuerSigningKey = true,
-                    // The Issuer will be our API 
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config["TokenKey"])),
-                    ValidateIssuer = false,
-                    // Audience is our angular app
-                    ValidateAudience = false
-                };
-            }
+            //         ValidateIssuerSigningKey = true,
+            //         // The Issuer will be our API 
+            //         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config["TokenKey"])),
+            //         ValidateIssuer = false,
+            //         // Audience is our angular app
+            //         ValidateAudience = false
+            //     };
+            // }
 
-            );
+            // );
             // Ordering doesn't matter here but does in the Configure method
             services.AddControllers();
             services.AddCors();
-
-
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
@@ -61,11 +57,13 @@ namespace API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
             }
-            app.UseMiddleware<ExceptionMiddleware>();
-            app.UseCors(corsPolicy => corsPolicy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
             app.UseHttpsRedirection();
-            // app.UseAuthentication();
             app.UseRouting();
+            app.UseCors(corsPolicy => corsPolicy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+
+            app.UseMiddleware<ExceptionMiddleware>();
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
