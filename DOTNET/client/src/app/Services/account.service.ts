@@ -3,13 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { ReplaySubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 // Services uses the singleTOn pattern, it is only destroyed when we leave the page
 @Injectable({
   providedIn: 'root',
 })
 export class AccountService {
-  baseUrl = 'https://localhost:5001/api/';
+  // Anuglar will auto detect the environment and use the relevant environment
+  baseUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<any>(1);
   currentUser$ = this.currentUserSource.asObservable();
   constructor(private http: HttpClient) {}
