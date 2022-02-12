@@ -9,7 +9,7 @@ describe('ErrosInterceptor', () => {
   }));
 
   it('should be created', () => {
-    const interceptor: ErrorInterceptor = TestBed.inject(ErrosInterceptor);
+    const interceptor: ErrorInterceptor = TestBed.inject(ErrorInterceptor);
     expect(interceptor).toBeTruthy();
   });
 });

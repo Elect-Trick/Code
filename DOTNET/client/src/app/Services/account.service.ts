@@ -1,6 +1,6 @@
 import { User } from './../models/user.model';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -9,20 +9,28 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class AccountService {
+export class AccountService implements OnDestroy {
   // Anuglar will auto detect the environment and use the relevant environment
   baseUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<any>(1);
   currentUser$ = this.currentUserSource.asObservable();
   constructor(private http: HttpClient) {}
+  ngOnDestroy(): void {
+    if (this.currentUser$) {
+      // this.currentUserSource.next(null);
+    }
+  }
 
   login(loginData: any) {
     return this.http.post<User>(this.baseUrl + 'account/login', loginData).pipe(
       map((response: User) => {
         const user = response;
         if (user) {
-          localStorage.setItem('user', JSON.stringify(user));
-          this.currentUserSource.next(user);
+          const _user = localStorage.setItem(
+            'user',
+            JSON.stringify(user)
+          ) as any;
+          this.setCurrentUser(user);
         }
         return user;
       })
@@ -47,13 +55,13 @@ export class AccountService {
     return await this.http.get<User[]>(this.baseUrl + 'users');
   }
 
-  setCurrentUser(user: User) {
-    this.currentUserSource.next(user);
+  setCurrentUser(user: any) {
+    const _user = localStorage.getItem('user');
+    this.currentUserSource.next(_user);
   }
 
   logout() {
-    let user: User;
     localStorage.removeItem('user');
-    this.currentUserSource.next(null);
+    this.setCurrentUser(null);
   }
 }

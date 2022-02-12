@@ -15,9 +15,6 @@ export class MemberCardComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    // this.activatedRoute.paramMap.subscribe(para =>{
-    //   if(para.has("username"))
-    // });
 
   }
 

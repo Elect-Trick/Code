@@ -1,3 +1,4 @@
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,6 +21,8 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,7 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
     NotFoundComponent,
     ServerErrorComponent,
     MemberCardComponent,
+    MemberEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,12 +47,16 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+
     SharedModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
+
   ],
   bootstrap: [AppComponent],
+  exports: [],
 })
 export class AppModule {}
