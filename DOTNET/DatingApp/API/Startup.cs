@@ -1,11 +1,7 @@
 using Microsoft.OpenApi.Models;
 using API.Middleware;
 using API.Extensions;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using API.Helpers;
-using API.Interfaces;
-using API.Data;
+
 
 namespace API
 {
@@ -61,9 +57,9 @@ namespace API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
             }
+            app.UseCors(corsPolicy => corsPolicy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseCors(corsPolicy => corsPolicy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
 
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseAuthentication();

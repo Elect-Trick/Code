@@ -1,10 +1,16 @@
+import { MemberEditComponent } from './../members/member-edit/member-edit.component';
+import { PhotoEditorComponent } from './../members/photo-editor/photo-editor.component';
+import { take, tap } from 'rxjs/operators';
 import { MembersService } from 'src/app/Services/members.service';
 import { AccountService } from './../Services/account.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Member } from '../models/member.model';
+import { ViewChild } from '@angular/core';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-nav',
@@ -13,26 +19,41 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class NavComponent implements OnInit, OnDestroy {
   accountSub!: Subscription;
+  memberSub! : Subscription;
+  member!: Member;
   model: any = {};
+  user!: Member;
   // loggedIn: boolean=false;
+  profilePic: any;
   currentUser$: Observable<User> | undefined;
+  user2!: MemberEditComponent;
+
 
   constructor(
     public accountService: AccountService,
     private memberService: MembersService,
     private router: Router,
     private toastr: ToastrService
-  ) {}
+  ) {
+   this.accountSub = this.accountService.currentUser$.subscribe((res) => {
+      this.user = JSON.parse(res);
+     this.memberSub= this.memberService.getMember(this.user.username).subscribe(res=>{
+        this.profilePic = res.photoUrl;
+      });
+
+    });
+  }
+
   ngOnDestroy(): void {
     if (this.accountSub) {
       this.accountSub.unsubscribe();
+    }  if (this.memberSub) {
+      this.memberSub.unsubscribe();
     }
   }
 
   ngOnInit() {
-    this.accountService.currentUser$.subscribe((res) => {
-      this.model.username = JSON.parse(res as any).username;
-    });
+    console.log('Nav ran');
   }
 
   login() {
@@ -41,14 +62,11 @@ export class NavComponent implements OnInit, OnDestroy {
         if (response) {
           this.router.navigateByUrl('/members');
 
-
           // this.model = {};
         }
-
-
       },
       (error) => {
-        this.toastr.error(error.error.errors);
+        this.toastr.error(error.errors);
       }
     );
   }

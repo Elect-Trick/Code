@@ -15,6 +15,7 @@ namespace API.Data
         }
 
         public DbSet<AppUser> Users { get; set; }
+        public DbSet<Photo> Photos { get; set; }
     }
 }
 // DataContext defines the tables we are creating 

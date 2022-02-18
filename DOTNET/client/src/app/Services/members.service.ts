@@ -16,6 +16,8 @@ export class MembersService implements OnInit {
   ngOnInit(): void {}
   getMembers() {
     // Users is protected so we need add a header
+    // Checks if there is a local copy of members before making the API call
+
     if (this.members.length > 0) {
       return of(this.members);
     } else {
@@ -29,20 +31,25 @@ export class MembersService implements OnInit {
   }
 
   getMember(username: string) {
+    // Checks if there is a local copy of members before making the API call
     const member = this.members.find((z) => z.username == username);
     if (member != undefined) {
       return of(member);
     } else {
-      return this.http.get<Member>(this.baseUrl + `users/${username}`);
+      return this.http.get<Member>(this.baseUrl + `users/${username}`).pipe(response =>{
+        return response;
+      });
     }
   }
 
   updateMember(member: Member) {
     return this.http.put(this.baseUrl + 'users', member).pipe(
-      map(()=>{
+      map(() => {
         const index = this.members.indexOf(member);
         this.members[index] = member;
       })
     );
   }
+
+
 }

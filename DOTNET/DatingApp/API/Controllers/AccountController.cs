@@ -53,7 +53,7 @@ namespace API.Controllers
         public async Task<ActionResult<UserDTO>> Login(LoginDTO loginData)
         {
             // Find the entry in the table based off a username 
-            var user = await Context.Users.SingleOrDefaultAsync(x => x.UserName == loginData.Username.ToLower());
+            var user = await Context.Users.Include(z=>z.Photos).SingleOrDefaultAsync(x => x.UserName == loginData.Username.ToLower());
             if (user == null)
             {
                 return BadRequest("Invalid Username");
@@ -72,10 +72,14 @@ namespace API.Controllers
                 }
 
             }
+
             return new UserDTO
             {
                 Username = user.UserName,
-                Token = TokenService.CreateToken(user)
+                Token = TokenService.CreateToken(user),
+                PhotoUrl = user.Photos?.FirstOrDefault(x => x.isMain)?.Url
+
+
             };
 
         }

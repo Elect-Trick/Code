@@ -6,3 +6,10 @@
 {
   text-decoration: none !important;
 }
+
+img{
+  max-height: 50px;
+  border: 2px, solid white;
+  display: inline;
+  margin-right: 15px;
+}

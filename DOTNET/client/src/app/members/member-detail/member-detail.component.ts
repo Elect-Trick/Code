@@ -35,58 +35,19 @@ export class MemberDetailComponent implements OnInit {
         imageAnimation: NgxGalleryAnimation.Slide,
         preview: false,
       },
-      // // max-width 800
-      // {
-      //   breakpoint: 800,
-      //   width: '100%',
-      //   height: '600px',
-      //   imagePercent: 80,
-      //   thumbnailsPercent: 20,
-      //   thumbnailsMargin: 20,
-      //   thumbnailMargin: 20,
-      // },
-      // // max-width 400
-      // {
-      //   breakpoint: 400,
-      //   preview: false,
-      // },
     ];
-    // this.galleryImages = [
-    //   {
-    //     small: 'assets/img/gallery/1-small.jpeg',
-    //     medium: 'assets/img/gallery/1-medium.jpeg',
-    //     big: 'assets/img/gallery/1-big.jpeg',
-    //   },
-    //   {
-    //     small: 'assets/img/gallery/2-small.jpeg',
-    //     medium: 'assets/img/gallery/2-medium.jpeg',
-    //     big: 'assets/img/gallery/2-big.jpeg',
-    //   },
-    //   {
-    //     small: 'assets/img/gallery/3-small.jpeg',
-    //     medium: 'assets/img/gallery/3-medium.jpeg',
-    //     big: 'assets/img/gallery/3-big.jpeg',
-    //   },
-    //   {
-    //     small: 'assets/img/gallery/4-small.jpeg',
-    //     medium: 'assets/img/gallery/4-medium.jpeg',
-    //     big: 'assets/img/gallery/4-big.jpeg',
-    //   },
-    //   {
-    //     small: 'assets/img/gallery/5-small.jpeg',
-    //     medium: 'assets/img/gallery/5-medium.jpeg',
-    //     big: 'assets/img/gallery/5-big.jpeg',
-    //   },
-    // ];
+
   }
 
   getImages(): NgxGalleryImage[] {
+
+    // Adding images from the db to an array we will use in the front end.
     const galleryImages: NgxGalleryImage[] = [];
     for (let index = 0; index < this.member.photos.length; index++) {
       galleryImages.push({
-        small: this.member.photoUrl,
-        medium: this.member.photoUrl,
-        big: this.member.photoUrl,
+        small: this.member.photos[index].url,
+        medium: this.member.photos[index].url,
+        big: this.member.photos[index].url,
       });
     }
     return galleryImages;
@@ -100,7 +61,7 @@ export class MemberDetailComponent implements OnInit {
         this.memberService
           .getMember(paraMap.get('username') as string)
           .subscribe((member) => {
-            this.member = member;
+            this.member = member as Member;
             this.galleryImages = this.getImages();
           });
       }

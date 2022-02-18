@@ -17,7 +17,7 @@ export class AccountService implements OnDestroy {
   constructor(private http: HttpClient) {}
   ngOnDestroy(): void {
     if (this.currentUser$) {
-      // this.currentUserSource.next(null);
+      this.currentUserSource.next(null);
     }
   }
 
@@ -25,11 +25,12 @@ export class AccountService implements OnDestroy {
     return this.http.post<User>(this.baseUrl + 'account/login', loginData).pipe(
       map((response: User) => {
         const user = response;
+        console.log('response has', response);
         if (user) {
           const _user = localStorage.setItem(
             'user',
-            JSON.stringify(user)
-          ) as any;
+            JSON.stringify(user as User)
+          );
           this.setCurrentUser(user);
         }
         return user;
@@ -58,6 +59,13 @@ export class AccountService implements OnDestroy {
   setCurrentUser(user: any) {
     const _user = localStorage.getItem('user');
     this.currentUserSource.next(_user);
+  }
+
+  setMainPhoto(photoId: number) {
+    return this.http.put(this.baseUrl + 'users/set-main-photo/' + photoId, {});
+  }
+  deletePhoto(photoId: number) {
+    return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
   }
 
   logout() {

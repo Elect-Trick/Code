@@ -13,5 +13,6 @@ namespace API.Interfaces
 
         Task<IEnumerable<MemberDTO>> GetMembersAsync();
         Task<MemberDTO> GetMemberAsync(string username);
+        Task<Boolean> DeletePhoto(int phottoId, string username);
     }
 }

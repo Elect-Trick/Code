@@ -21,7 +21,6 @@ busyRequestCount = 0;
   {
     this.busyRequestCount--;
     if(this.busyRequestCount >=0){
-      console.log("If entered");
       this.busyRequestCount++;
       this.spinnerService.hide();
     }

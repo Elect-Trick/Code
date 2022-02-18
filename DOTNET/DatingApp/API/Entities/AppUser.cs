@@ -1,16 +1,16 @@
 using Microsoft.AspNetCore.Authorization;
 using API.Extensions;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Entities
 {
     // [Authorize]
+    [Table("Users")]
+
     public class AppUser
     {
-        public AppUser()
-        {
-        }
-
-        public int Id { get; set; }
+        
+    public int Id { get; set; }
         // Keep it simple, ID will be used for auto incrementation and Primary Key in our DB
         public string UserName { get; set; }
         public byte[] PasswordHash { get; set; }
@@ -24,6 +24,7 @@ namespace API.Entities
         public string LookingFor { get; set; }
         public string Interests { get; set; }
         public string City { get; set; }
+
         public string Country { get; set; }
         public ICollection<Photo> Photos { get; set; }
 
@@ -32,9 +33,12 @@ namespace API.Entities
         //     return DateTimeExtensions.CalculateAge(DateOfBirth);
 
         // }
+    
 
 
-    }
 
 
 }
+}
+
+

@@ -11,10 +11,12 @@ namespace API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
+            services.AddScoped<IPhotoService, PhotosService>();
+            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddScoped<ITokenService, TokenService>();
-              // Lamda expressions allows to pass parameters as expresions, brings convenience. 
+            // Lamda expressions allows to pass parameters as expresions, brings convenience. 
             services.AddDbContext<DataContext>(options =>
             {
 

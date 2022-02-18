@@ -56,9 +56,6 @@ namespace API.Data.Migrations
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnType("BLOB");
 
-                    b.Property<string>("PhotoUrl")
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime>("ProfileRegistered")
                         .HasColumnType("TEXT");
 
@@ -99,6 +96,7 @@ namespace API.Data.Migrations
                 {
                     b.HasOne("API.Entities.AppUser", "AppUser")
                         .WithMany("Photos")
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .HasForeignKey("AppUserId");
 
                     b.Navigation("AppUser");
