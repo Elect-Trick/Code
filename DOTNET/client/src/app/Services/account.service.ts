@@ -44,8 +44,11 @@ export class AccountService implements OnDestroy {
       .pipe(
         map((user: User) => {
           if (user) {
-            localStorage.setItem('user', JSON.stringify(user));
-            this.currentUserSource.next(user);
+            const _user = localStorage.setItem(
+              'user',
+              JSON.stringify(user as User)
+            );
+            this.setCurrentUser(user);
           }
           return user;
         })
@@ -65,7 +68,7 @@ export class AccountService implements OnDestroy {
     return this.http.put(this.baseUrl + 'users/set-main-photo/' + photoId, {});
   }
   deletePhoto(photoId: number) {
-    return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
+    return this.http.delete<boolean>(this.baseUrl + 'users/delete-photo/' + photoId);
   }
 
   logout() {

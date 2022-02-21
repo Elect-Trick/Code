@@ -25,6 +25,7 @@ export class NavComponent implements OnInit, OnDestroy {
   user!: Member;
   // loggedIn: boolean=false;
   profilePic: any;
+  knownAs!: string;
   currentUser$: Observable<User> | undefined;
   user2!: MemberEditComponent;
 
@@ -36,9 +37,10 @@ export class NavComponent implements OnInit, OnDestroy {
     private toastr: ToastrService
   ) {
    this.accountSub = this.accountService.currentUser$.subscribe((res) => {
-      this.user = JSON.parse(res);
+      this.user = JSON.parse(res as any);
      this.memberSub= this.memberService.getMember(this.user.username).subscribe(res=>{
         this.profilePic = res.photoUrl;
+        this.knownAs = res.knownAs;
       });
 
     });
@@ -47,8 +49,6 @@ export class NavComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.accountSub) {
       this.accountSub.unsubscribe();
-    }  if (this.memberSub) {
-      this.memberSub.unsubscribe();
     }
   }
 

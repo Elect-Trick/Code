@@ -1,5 +1,15 @@
 .form-control {
   width: 50%;
   margin-left: 25%;
-  border: 0;
+  margin-top: 5px;
+}
+
+.confirm {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+  color: #d9534f;
+}
+.male{
+  margin-right: 7px;
 }

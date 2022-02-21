@@ -1,41 +1,89 @@
 <form
   [formGroup]="registrationForm"
-  (ngSubmit)="register()"
+  (ngSubmit)="registrationForm.valid && register()"
   autocomplete="false"
 >
   <h2 class="text-center text-primary">Sign Up</h2>
   <hr />
+  <div class="form-group text-center">
+    <label for="" style="margin-right: 10px" class="control-label">I am:</label>
+    <label class="radio-inline male">
+      <input type="radio" value="male" formControlName="gender" /> Male</label
+    >
+
+    <label class="radio-inline">
+      <input
+        type="radio"
+        value="female"
+        formControlName="gender"
+        class="ml-3"
+      />
+      Female</label
+    >
+  </div>
+
+  <app-text-input
+    [formControl]="$any(registrationForm.controls['username'])"
+    [label]="'Username'"
+  >
+  </app-text-input>
+  <app-text-input
+    [formControl]="$any(registrationForm.controls['knownAs'])"
+    [label]="'knownAs'"
+  >
+  </app-text-input>
+
+  <app-date-input
+    [formControl]="$any(registrationForm.controls['dateOfBirth'])"
+    [label]="'Date of Birth'"
+    [maxDate]="maxDate"
+  >
+  </app-date-input>
+  <app-text-input
+    [formControl]="$any(registrationForm.controls['city'])"
+    [label]="'City'"
+  >
+  </app-text-input>
+  <app-text-input
+    [formControl]="$any(registrationForm.controls['country'])"
+    [label]="'Country'"
+  >
+  <!-- </app-text-input>
+  <app-text-input
+    [formControl]="$any(registrationForm.controls['username'])"
+    [label]="'Username'"
+  > -->
+  </app-text-input>
+  <app-text-input
+    [formControl]="$any(registrationForm.controls['password'])"
+    [label]="'Password'"
+    [type]="'password'"
+  >
+  </app-text-input>
+  <app-text-input
+    [formControl]="$any(registrationForm.controls['confirm'])"
+    [label]="'Confirm Password'"
+    [type]="'password'"
+  >
+  </app-text-input>
+  <div
+    *ngIf="registrationForm?.getError('notmatched')"
+    class="text-center confirm"
+  >
+    Passwords do not match
+  </div>
 
   <div class="form-content text-center">
-    <div class="form-control">
-      <input
-        type="text"
-        placeholder="Username"
-        required
-        formControlName="username"
-      />
-    </div>
-
-    <div class="form-group">
-      <div class="form-control">
-        <input
-          type="password"
-          placeholder="Password"
-          required
-          formControlName="password"
-        />
-      </div>
-    </div>
     <div style="margin-top: 10px" class="form-group">
-      <button type="submit" style="margin-right: 15px" class="btn btn-success">
+      <button
+        [disabled]="!registrationForm.valid"
+        type="submit"
+        style="margin-right: 15px"
+        class="btn btn-success"
+      >
         Register
       </button>
-      <button
-        (click)="cancel()"
-        class="btn btn-warning"
-      >
-        Cancel
-      </button>
+      <button (click)="cancel()" class="btn btn-warning">Cancel</button>
     </div>
   </div>
 </form>

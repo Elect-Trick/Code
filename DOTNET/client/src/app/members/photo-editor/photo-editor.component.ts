@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { NavComponent } from './../../nav/nav.component';
 import { MembersService } from 'src/app/Services/members.service';
 import { AccountService } from './../../Services/account.service';
@@ -25,12 +26,14 @@ export class PhotoEditorComponent implements OnInit {
   user!: User;
   constructor(
     private accountService: AccountService,
-    private memberService: MembersService
+    private memberService: MembersService,
+   private toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
     this.accountService.currentUser$.pipe(tap()).subscribe((_user) => {
       this.user = JSON.parse(_user);
+      console.log('Photo Edit', this.user);
     });
 
     this.configureUploader();
@@ -51,6 +54,10 @@ export class PhotoEditorComponent implements OnInit {
       if(response)
       {
        this.member.photos = this.member.photos.filter(z=>z.id !=photo.id);
+       this.toastrService.success("Photo successfully deleted")
+      }
+      else{
+        this.toastrService.error("Something went wrong");
       }
     });
   }
@@ -87,7 +94,8 @@ this.accountService.setCurrentUser(this.user);
     // Popualate the photo array after a sucessful upload
     this.uploader.onSuccessItem = (item, response, status, headers) => {
       if (response) {
-        const photo = JSON.parse(response);
+        let photo = JSON.parse(response);
+        photo.isMain = false;
         this.member.photos.push(photo);
       }
     };

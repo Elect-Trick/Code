@@ -22,8 +22,10 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
-import { NgxSpinnerModule } from 'ngx-spinner';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { TextInputComponent } from './forms/text-input/text-input.component';
+import {PasswordValidator} from './register/password-validator';
+import { DateInputComponent } from './forms/date-input/date-input.component'
 
 @NgModule({
   declarations: [
@@ -41,6 +43,9 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
     MemberCardComponent,
     MemberEditComponent,
     PhotoEditorComponent,
+    TextInputComponent,
+    DateInputComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -49,6 +54,7 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+
 
     SharedModule,
   ],

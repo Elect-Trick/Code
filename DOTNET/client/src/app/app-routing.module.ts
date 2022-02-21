@@ -24,6 +24,7 @@ const routes: Routes = [
       { path: 'member/edit', component: MemberEditComponent, canDeactivate:[PreventUnsavedChangesGuard] },
       { path: 'lists', component: ListsComponent },
       { path: 'messages', component: MessagesComponent },
+
     ],
   },
   // Wildcard route, when a user enters a non existant resource

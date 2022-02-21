@@ -5,6 +5,7 @@ using System.Text;
 using API.DTOs;
 using Microsoft.EntityFrameworkCore;
 using API.Interfaces;
+using AutoMapper;
 
 namespace API.Controllers
 
@@ -13,8 +14,10 @@ namespace API.Controllers
     {
         private readonly DataContext Context;
         private readonly ITokenService TokenService;
-        public AccountController(DataContext context, ITokenService tokenService)
+        private readonly IMapper _mapper;
+        public AccountController(DataContext context, ITokenService tokenService, IMapper mapper)
         {
+            _mapper = mapper;
             TokenService = tokenService;
             Context = context;
         }
@@ -26,17 +29,16 @@ namespace API.Controllers
             {
                 return BadRequest("Username already exists");
             }
+            var user = _mapper.Map<AppUser>(registrationData);
 
             // The using statement implements the dispose method
             // This will destroy the newly created instance once we are done
             using var hmac = new System.Security.Cryptography.HMACSHA512();
-            var user = new AppUser
-            {
-                UserName = registrationData.Username.ToLower(),
-                // We use this to generate a Hash key and then obtain the password Salt from the hmac.key
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registrationData.Password)),
-                PasswordSalt = hmac.Key
-            };
+            user.UserName = registrationData.Username.ToLower();
+            // We use this to generate a Hash key and then obtain the password Salt from the hmac.key
+            user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registrationData.Password));
+            user.PasswordSalt = hmac.Key;
+
             // Adding data to the table.
 
             Context.Users.Add(user);
@@ -45,7 +47,9 @@ namespace API.Controllers
             return new UserDTO
             {
                 Username = user.UserName,
-                Token = TokenService.CreateToken(user)
+                Token = TokenService.CreateToken(user),
+                KnownAs = user.KnownAs
+
             };
         }
 
@@ -53,7 +57,7 @@ namespace API.Controllers
         public async Task<ActionResult<UserDTO>> Login(LoginDTO loginData)
         {
             // Find the entry in the table based off a username 
-            var user = await Context.Users.Include(z=>z.Photos).SingleOrDefaultAsync(x => x.UserName == loginData.Username.ToLower());
+            var user = await Context.Users.Include(z => z.Photos).SingleOrDefaultAsync(x => x.UserName == loginData.Username.ToLower());
             if (user == null)
             {
                 return BadRequest("Invalid Username");
@@ -77,7 +81,8 @@ namespace API.Controllers
             {
                 Username = user.UserName,
                 Token = TokenService.CreateToken(user),
-                PhotoUrl = user.Photos?.FirstOrDefault(x => x.isMain)?.Url
+                PhotoUrl = user.Photos?.FirstOrDefault(x => x.isMain)?.Url,
+                KnownAs = user.KnownAs
 
 
             };
