@@ -1,3 +1,4 @@
+import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AccountService } from './../../Services/account.service';
 import { MembersService } from './../../Services/members.service';
@@ -6,6 +7,9 @@ import { Member } from 'src/app/models/member.model';
 import { AfterViewInit } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Pagination } from 'src/app/models/pagination.model';
+import { UserParams } from 'src/app/models/userParams.model';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-member-list',
@@ -13,36 +17,66 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./member-list.component.css'],
 })
 export class MemberListComponent implements OnInit, OnDestroy {
-  membersObs! : Subscription;
-  members$!: Observable<Member[]>;
+  membersObs!: Subscription;
+  members!: Member[];
+  pagination!: Pagination;
+  pageSize = 5;
+  pageNumber = 1;
+  userParams!: UserParams;
+  user!: User;
+  genderList = [{value:'male', display:'Males'},{value: 'female', display:'Females'}];
+
   mappedMembers: Member[] = [];
-  constructor(private memberService: MembersService, private accountService :AccountService) {}
+  constructor(
+    private memberService: MembersService,
+    private accountService: AccountService
+  ) {
+
+    this.userParams = this.memberService.getUserParams();
+    // this.accountService.currentUser$.pipe(take(1)).subscribe(user=>{
+    //   this.user = user as User;
+    //   this.userParams = new UserParams(user as User)
+    // });
+  }
   ngOnDestroy(): void {
-if(this.membersObs)
-{
-  this.membersObs.unsubscribe();
-}  }
-
-
+    if (this.membersObs) {
+      this.membersObs.unsubscribe();
+    }
+  }
 
   ngOnInit(): void {
-   console.log('Current User in members is',this.accountService.currentUser$)
+    console.log('Current User in members is', this.accountService.currentUser$);
     // this.getMember('park');
-    this.members$ = this.memberService.getMembers();
+    this.getAllMembers();
+  }
+
+  resetFilters()
+  {
+    this.userParams  = this.memberService.resetUserParams();
+    this.getAllMembers();
+  }
+  pageChanged(event : any) {
+    this.userParams.pageNumber = event.page;
+    this.memberService.setUserParams(this.userParams);
+    this.getAllMembers();
 
   }
 
-
-
   getMember(username: string) {
-   this.memberService.getMember('park').subscribe((response) => {
+    this.memberService.getMember('park').subscribe((response) => {
       console.log('Single Member', response);
     });
   }
-  // getAllMembers() {
-  // this.membersObs=  this.memberService.getMembers().subscribe((response) => {
-  //     this.members.push(response as any);
-  //     this.members = this.members.flat(1);
-  //   });
-  // }
+  getAllMembers() {
+
+    this.memberService.setUserParams(this.userParams);
+    this.memberService
+      .getMembers(this.userParams)
+      .subscribe((response) => {
+        this.members = response.result;
+
+        this.pagination = response.pagination;
+        console.log('Pagination', response.pagination);
+      });
+  }
 }

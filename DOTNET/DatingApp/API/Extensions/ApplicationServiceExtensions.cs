@@ -14,6 +14,7 @@ namespace API.Extensions
             services.AddScoped<IPhotoService, PhotosService>();
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<LogUserActivity>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddScoped<ITokenService, TokenService>();
             // Lamda expressions allows to pass parameters as expresions, brings convenience. 

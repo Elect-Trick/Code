@@ -7,6 +7,7 @@ using API.Extensions;
 using API.Entities;
 using Microsoft.EntityFrameworkCore;
 using API.Data;
+using API.Helpers;
 
 namespace API.Controllers
 {
@@ -34,14 +35,23 @@ namespace API.Controllers
         [HttpGet]
         // Making your code Asynchronous helps to serve multiple requests with ease
         // Each thread is passed on to the next available thread 
-        public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers([FromQuery] UserParams userParams)
         {
 
             //    There are async functions, choose these over regular ones
-            var users = await _userRepo.GetMembersAsync();
+            // Users is now a pagedList
+            var user = await _userRepo.GetUserByUsernameAsync(User.GetUsername());
+            userParams.CurrentUsername = user.UserName;
 
-            var usersToReturn = _mapper.Map<IEnumerable<MemberDTO>>(users);
-            return Ok(usersToReturn);
+            if (string.IsNullOrEmpty(userParams.Gender))
+            {
+                userParams.Gender = user.Gender == "male" ? "female" : "male";
+            }
+            var users = await _userRepo.GetMembersAsync(userParams);
+            Response.AddPaginationHeader(users.CurrentPage, userParams.PageSize, users.TotalCount, users.TotalPages);
+
+            // var usersToReturn = _mapper.Map<IEnumerable<MemberDTO>>(users);
+            return Ok(users);
         }
 
         // api/users/id
@@ -137,11 +147,11 @@ namespace API.Controllers
             var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
             if (photo == null)
             {
-                    return false;
+                return false;
             }
             else if (photo.isMain == true)
             {
-                    return false;
+                return false;
             }
             else
             {

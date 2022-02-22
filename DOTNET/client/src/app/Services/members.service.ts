@@ -1,9 +1,14 @@
+import { UserParams } from 'src/app/models/userParams.model';
+import { AccountService } from './account.service';
 import { environment } from 'src/environments/environment';
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Member } from '../models/member.model';
 import { of } from 'rxjs/internal/observable/of';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
+import { PaginatedResult } from '../models/pagination.model';
+import { pipe } from 'rxjs';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,35 +16,104 @@ import { map } from 'rxjs/operators';
 export class MembersService implements OnInit {
   baseUrl = environment.apiUrl;
   members: Member[] = [];
-  constructor(private http: HttpClient) {}
+  user!: User;
+  userParams!: UserParams;
+  // Map is commonly used to store something with a Key and  a Value
+  memberCache = new Map();
+  constructor(private http: HttpClient, private accountService: AccountService) {
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user=>{
+      this.user = user as User;
+      this.userParams = new UserParams(user as User)
+    });
+  }
 
   ngOnInit(): void {}
-  getMembers() {
+  getMembers(userParams: UserParams) {
+    var response = this.memberCache.get(Object.values(userParams).join('-'));
+    if (response) {
+      return of(response);
+    }
+    let params = this.getPaginationHeaders(
+      userParams.pageNumber,
+      userParams.pageSize
+    );
+
+    params = params.append('minAge', userParams.minAge.toString());
+    params = params.append('maxAge', userParams.maxAge.toString());
+    params = params.append('gender', userParams.gender.toString());
+    params = params.append('orderBy', userParams.orderBy);
     // Users is protected so we need add a header
     // Checks if there is a local copy of members before making the API call
 
-    if (this.members.length > 0) {
-      return of(this.members);
-    } else {
-      return this.http.get<Member[]>(this.baseUrl + 'users/').pipe(
-        map((members) => {
-          this.members = members;
-          return this.members;
-        })
-      );
-    }
+    return this.getPaginatedResult<Member[]>(
+      this.baseUrl + 'users',
+      params
+    ).pipe(
+      map((response) => {
+        this.memberCache.set(Object.values(userParams).join('-'), response);
+        return response;
+      })
+    );
+  }
+
+  resetUserParams()
+  {
+    this.userParams = new UserParams(this.user);
+    return this.userParams;
+  }
+
+  getUserParams()
+  {
+    return this.userParams;
+  }
+
+  setUserParams(params:UserParams){
+    this.userParams = params;
+  }
+
+  private getPaginatedResult<T>(url: string, params: any) {
+    const paginatedResult: PaginatedResult<T> = new PaginatedResult<T>();
+    return this.http.get<T>(url, { observe: 'response', params }).pipe(
+      map((response) => {
+        paginatedResult.result = response.body as T;
+        if (response.headers.get('Pagination') != null) {
+          paginatedResult.pagination = JSON.parse(
+            response.headers.get('Pagination') as any
+          );
+        }
+        return paginatedResult;
+      })
+    );
+  }
+
+  private getPaginationHeaders(pageNumber: number, pageSize: number) {
+    let params = new HttpParams();
+    params = params.append('pageNumber', pageNumber.toString());
+    // Dont confuse pageSize with itemsPerpage, in the backend its referred to as pageSize
+    params = params.append('pageSize', pageSize.toString());
+    return params;
   }
 
   getMember(username: string) {
     // Checks if there is a local copy of members before making the API call
-    const member = this.members.find((z) => z.username == username);
-    if (member != undefined) {
+    // console.log('Cache',response);
+    // const member = [...this.memberCache?.values()]
+    //   .reduce((arr, elem) => arr.concat(elem.results), [])
+    //   .find((_mem?: Member) => _mem?.username);
+    //       console.log('Cache',member);
+
+    const member = [...this.memberCache.values()]
+      .reduce((source, elem) => source.concat(elem.result), [])
+      .find((z: Member) => z.username == username);
+
+    if (member) {
       return of(member);
-    } else {
-      return this.http.get<Member>(this.baseUrl + `users/${username}`).pipe(response =>{
+    }
+    return this.http
+      .get<Member>(this.baseUrl + `users/${username}`)
+      .pipe((response) => {
         return response;
       });
-    }
   }
 
   updateMember(member: Member) {
@@ -50,6 +124,4 @@ export class MembersService implements OnInit {
       })
     );
   }
-
-
 }

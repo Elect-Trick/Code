@@ -38,7 +38,9 @@ export class NavComponent implements OnInit, OnDestroy {
   ) {
    this.accountSub = this.accountService.currentUser$.subscribe((res) => {
       this.user = JSON.parse(res as any);
-     this.memberSub= this.memberService.getMember(this.user.username).subscribe(res=>{
+     this.memberSub= this.memberService.getMember(this.user.username).subscribe((res:Member)=>{
+
+      // console.log('Member in Nav',res);
         this.profilePic = res.photoUrl;
         this.knownAs = res.knownAs;
       });
