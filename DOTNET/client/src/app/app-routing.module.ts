@@ -11,6 +11,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { ListsComponent } from './lists/lists.component';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
+import { MemberDetailResolver } from './resolvers/member-detail.resolver';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, },
@@ -20,7 +21,7 @@ const routes: Routes = [
     canActivate: [GuardAuthGuard],
     children: [
       { path: 'members', component: MemberListComponent },
-      { path: 'members/:username', component: MemberDetailComponent },
+      { path: 'members/:username', component: MemberDetailComponent ,resolve:{member:MemberDetailResolver} },
       { path: 'member/edit', component: MemberEditComponent, canDeactivate:[PreventUnsavedChangesGuard] },
       { path: 'lists', component: ListsComponent },
       { path: 'messages', component: MessagesComponent },

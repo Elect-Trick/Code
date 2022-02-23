@@ -7,6 +7,10 @@ import {
   NgxGalleryImage,
   NgxGalleryOptions,
 } from '@kolkov/ngx-gallery';
+import { ViewChild } from '@angular/core';
+import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
+import { MessasgeService } from 'src/app/Services/messasge.service';
+import { Message } from 'src/app/models/message.model';
 
 @Component({
   selector: 'app-member-detail',
@@ -15,17 +19,27 @@ import {
 })
 export class MemberDetailComponent implements OnInit {
   member!: Member;
-
+@ViewChild('memberTabs',{static: true}) memberTabs!:  TabsetComponent;
+activeTab!: TabDirective;
   galleryOptions: NgxGalleryOptions[] = [];
   galleryImages: NgxGalleryImage[] = [];
+  messages: Message[]=[];
   constructor(
+    private messageService: MessasgeService,
     private memberService: MembersService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {}
   // We need the activated route in order to pass a paramter in our URL
   ngOnInit(): void {
-    this.getMember();
+    this.activatedRoute.data.subscribe(data =>{
+      this.member = data['member'];
+    })
+
+    this.activatedRoute.queryParams.subscribe(params =>{
+      params['tab'] ? this.activateTab(params['tab']): this.activateTab(0)
+
+    });
     this.galleryOptions = [
       {
         width: '500px',
@@ -36,7 +50,30 @@ export class MemberDetailComponent implements OnInit {
         preview: false,
       },
     ];
+    this.galleryImages = this.getImages();
 
+
+  }
+
+  activateTab(tabId: number)
+  {
+    this.memberTabs.tabs[tabId].active =true;
+  }
+
+  onTabChange(data: TabDirective){
+    this.activeTab = data;
+    if(this.activeTab.heading ==="Messages" && this.messages.length===0)
+    {
+      this.getMessasges();
+    }
+  }
+  getMessasges()
+  {
+    this.messageService.getMessageThread(this.member.username).subscribe(messages=>{
+      this.messages = messages;
+
+      console.log("Messages",this.messages);
+    });
   }
 
   getImages(): NgxGalleryImage[] {
@@ -53,18 +90,17 @@ export class MemberDetailComponent implements OnInit {
     return galleryImages;
   }
 
-  getMember() {
-    this.activatedRoute.paramMap.subscribe((paraMap) => {
-      if (!paraMap.has('username')) {
-        this.router.navigateByUrl('/not-found');
-      } else {
-        this.memberService
-          .getMember(paraMap.get('username') as string)
-          .subscribe((member) => {
-            this.member = member as Member;
-            this.galleryImages = this.getImages();
-          });
-      }
-    });
-  }
+  // getMember() {
+  //   this.activatedRoute.paramMap.subscribe((paraMap) => {
+  //     if (!paraMap.has('username')) {
+  //       this.router.navigateByUrl('/not-found');
+  //     } else {
+  //       this.memberService
+  //         .getMember(paraMap.get('username') as string)
+  //         .subscribe((member) => {
+  //           this.member = member as Member;
+  //         });
+  //     }
+  //   });
+  // }
 }

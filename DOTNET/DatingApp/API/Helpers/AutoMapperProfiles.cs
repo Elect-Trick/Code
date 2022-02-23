@@ -15,11 +15,13 @@ namespace API.Helpers
             // CreateMap(fromDTO, toDTO)
             // CreateMap<AppUser, IEnumerable<MemberDTO>>();
             CreateMap<AppUser, MemberDTO>().ForMember(dest => dest.PhotoUrl, options => options.MapFrom(src =>
-            src.Photos.First(x =>  x.isMain==true).Url))
-            .ForMember(dest =>dest.Age, options=> options.MapFrom(src=>src.DateOfBirth.CalculateAge()));
+            src.Photos.First(x => x.isMain == true).Url))
+            .ForMember(dest => dest.Age, options => options.MapFrom(src => src.DateOfBirth.CalculateAge()));
             CreateMap<Photo, PhotoDTO>();
             CreateMap<MemberUpdateDTO, AppUser>();
             CreateMap<RegisterDTO, AppUser>();
+            CreateMap<RegisterDTO, AppUser>();
+            CreateMap<Message, MessageDTO>().ForMember(dest => dest.SenderPhotoURL, opt => opt.MapFrom(src => src.Sender.Photos.FirstOrDefault(x => x.isMain).Url)).ForMember(dest => dest.RecipientPhotoUrl, opt => opt.MapFrom(src => src.Recipient.Photos.FirstOrDefault(x => x.isMain).Url));
         }
 
 

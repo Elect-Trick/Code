@@ -9,6 +9,8 @@ import { map, take } from 'rxjs/operators';
 import { PaginatedResult } from '../models/pagination.model';
 import { pipe } from 'rxjs';
 import { User } from '../models/user.model';
+import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
+import { Message } from '../models/message.model';
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +35,7 @@ export class MembersService implements OnInit {
     if (response) {
       return of(response);
     }
-    let params = this.getPaginationHeaders(
+    let params = getPaginationHeaders(
       userParams.pageNumber,
       userParams.pageSize
     );
@@ -45,9 +47,9 @@ export class MembersService implements OnInit {
     // Users is protected so we need add a header
     // Checks if there is a local copy of members before making the API call
 
-    return this.getPaginatedResult<Member[]>(
+    return getPaginatedResult<Member[]>(
       this.baseUrl + 'users',
-      params
+      params,this.http
     ).pipe(
       map((response) => {
         this.memberCache.set(Object.values(userParams).join('-'), response);
@@ -71,28 +73,7 @@ export class MembersService implements OnInit {
     this.userParams = params;
   }
 
-  private getPaginatedResult<T>(url: string, params: any) {
-    const paginatedResult: PaginatedResult<T> = new PaginatedResult<T>();
-    return this.http.get<T>(url, { observe: 'response', params }).pipe(
-      map((response) => {
-        paginatedResult.result = response.body as T;
-        if (response.headers.get('Pagination') != null) {
-          paginatedResult.pagination = JSON.parse(
-            response.headers.get('Pagination') as any
-          );
-        }
-        return paginatedResult;
-      })
-    );
-  }
 
-  private getPaginationHeaders(pageNumber: number, pageSize: number) {
-    let params = new HttpParams();
-    params = params.append('pageNumber', pageNumber.toString());
-    // Dont confuse pageSize with itemsPerpage, in the backend its referred to as pageSize
-    params = params.append('pageSize', pageSize.toString());
-    return params;
-  }
 
   getMember(username: string) {
     const member = [...this.memberCache.values()]
@@ -115,9 +96,9 @@ export class MembersService implements OnInit {
 
   getLikes(predicate : string, pageNumber: number, pageSize:number)
   {
-    let params = this.getPaginationHeaders(pageNumber,pageSize);
+    let params = getPaginationHeaders(pageNumber,pageSize,);
     params = params.append('predicate',predicate);
-   return this.getPaginatedResult<Member[]>(this.baseUrl+'likes',params).pipe(map(response=>{
+   return getPaginatedResult<Member[]>(this.baseUrl+'likes',params,this.http).pipe(map(response=>{
      return response;
    }))
   }
@@ -130,4 +111,6 @@ export class MembersService implements OnInit {
       })
     );
   }
+
+
 }
