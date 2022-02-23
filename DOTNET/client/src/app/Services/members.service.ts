@@ -95,13 +95,6 @@ export class MembersService implements OnInit {
   }
 
   getMember(username: string) {
-    // Checks if there is a local copy of members before making the API call
-    // console.log('Cache',response);
-    // const member = [...this.memberCache?.values()]
-    //   .reduce((arr, elem) => arr.concat(elem.results), [])
-    //   .find((_mem?: Member) => _mem?.username);
-    //       console.log('Cache',member);
-
     const member = [...this.memberCache.values()]
       .reduce((source, elem) => source.concat(elem.result), [])
       .find((z: Member) => z.username == username);
@@ -114,6 +107,19 @@ export class MembersService implements OnInit {
       .pipe((response) => {
         return response;
       });
+  }
+
+  addLike(username : string){
+    return this.http.post(this.baseUrl+'likes/'+username,{});
+  }
+
+  getLikes(predicate : string, pageNumber: number, pageSize:number)
+  {
+    let params = this.getPaginationHeaders(pageNumber,pageSize);
+    params = params.append('predicate',predicate);
+   return this.getPaginatedResult<Member[]>(this.baseUrl+'likes',params).pipe(map(response=>{
+     return response;
+   }))
   }
 
   updateMember(member: Member) {

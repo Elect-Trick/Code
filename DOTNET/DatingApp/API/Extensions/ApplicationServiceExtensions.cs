@@ -17,6 +17,8 @@ namespace API.Extensions
             services.AddScoped<LogUserActivity>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddScoped<ITokenService, TokenService>();
+             services.AddScoped<ILikesRepository, LikesRepository>();
+
             // Lamda expressions allows to pass parameters as expresions, brings convenience. 
             services.AddDbContext<DataContext>(options =>
             {

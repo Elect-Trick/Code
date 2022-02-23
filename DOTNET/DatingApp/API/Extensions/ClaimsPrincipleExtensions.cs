@@ -9,10 +9,10 @@ namespace API.Extensions
             // This represents the unique Name prop we set in the Claims principle
             return user.FindFirst(ClaimTypes.Name)?.Value;
         }
-        public static string GetUserID(this ClaimsPrincipal user)
+        public static int GetUserID(this ClaimsPrincipal user)
         {
             // This represents the unique Name prop we set in the Claims principle
-            return (user.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            return int.Parse((user.FindFirst(ClaimTypes.NameIdentifier)?.Value));
         }
     }
 }
