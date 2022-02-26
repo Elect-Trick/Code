@@ -14,13 +14,8 @@ export class HomeComponent implements OnInit {
   constructor(private accountService: AccountService) {}
 
   ngOnInit() {
-    this.getUsers();
   }
-  async getUsers() {
-    (await this.accountService.getAllUsers()).subscribe((users: User[]) => {
-      this.allUsers = users;
-    });
-  }
+
 
   registerToggle() {
     this.registerMode = !this.registerMode;

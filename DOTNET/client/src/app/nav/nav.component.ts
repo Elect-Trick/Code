@@ -38,12 +38,16 @@ export class NavComponent implements OnInit, OnDestroy {
   ) {
    this.accountSub = this.accountService.currentUser$.subscribe((res) => {
       this.user = JSON.parse(res as any);
-     this.memberSub= this.memberService.getMember(this.user.username).subscribe((res:Member)=>{
+      if(this.user)
+      { this.memberSub= this.memberService.getMember(this.user.username).subscribe((res:Member)=>{
 
-      // console.log('Member in Nav',res);
-        this.profilePic = res.photoUrl;
-        this.knownAs = res.knownAs;
-      });
+          this.profilePic = res.photoUrl;
+          this.knownAs = res.knownAs;
+        });
+
+      }
+
+
 
     });
   }
@@ -56,11 +60,14 @@ export class NavComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     console.log('Nav ran');
+
   }
 
   login() {
     this.accountSub = this.accountService.login(this.model).subscribe(
       (response) => {
+
+        console.log("Login response",response);
         if (response) {
           this.router.navigateByUrl('/members');
 

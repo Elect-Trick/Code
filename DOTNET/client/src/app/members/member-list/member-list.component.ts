@@ -33,10 +33,6 @@ export class MemberListComponent implements OnInit, OnDestroy {
   ) {
 
     this.userParams = this.memberService.getUserParams();
-    // this.accountService.currentUser$.pipe(take(1)).subscribe(user=>{
-    //   this.user = user as User;
-    //   this.userParams = new UserParams(user as User)
-    // });
   }
   ngOnDestroy(): void {
     if (this.membersObs) {
@@ -48,6 +44,7 @@ export class MemberListComponent implements OnInit, OnDestroy {
     console.log('Current User in members is', this.accountService.currentUser$);
     // this.getMember('park');
     this.getAllMembers();
+
   }
 
   resetFilters()

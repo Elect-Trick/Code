@@ -26,7 +26,8 @@ export class MemberEditComponent implements OnInit, OnDestroy {
     token: '',
     photoUrl: '',
     knownAs: '',
-    gender: ''
+    gender: '',
+    roles: []
   };
   accountSub! :Subscription;
   memberSub! :Subscription;

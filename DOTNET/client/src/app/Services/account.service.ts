@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 export class AccountService implements OnDestroy {
   // Anuglar will auto detect the environment and use the relevant environment
   baseUrl = environment.apiUrl;
+  user!: User;
   private currentUserSource = new ReplaySubject<any>(1);
   currentUser$ = this.currentUserSource.asObservable();
   constructor(private http: HttpClient) {}
@@ -21,19 +22,27 @@ export class AccountService implements OnDestroy {
     }
   }
 
+  fetchDecodedToken(user: User){
+
+    return JSON.parse(atob(user.token.split('.')[1])).role;
+
+  }
+
   login(loginData: any) {
     return this.http.post<User>(this.baseUrl + 'account/login', loginData).pipe(
       map((response: User) => {
-        const user = response;
-        console.log('response has', response);
-        if (user) {
-          const _user = localStorage.setItem(
+        this.user = response;
+        if (this.user) {
+
+          const roles = this.fetchDecodedToken(this.user);
+          this.user.roles = roles;
+          localStorage.setItem(
             'user',
-            JSON.stringify(user as User)
+            JSON.stringify(this.user as User)
           );
-          this.setCurrentUser(user);
+          this.setCurrentUser(this.user);
         }
-        return user;
+        return this.user;
       })
     );
   }
@@ -43,14 +52,17 @@ export class AccountService implements OnDestroy {
       .post<User>(this.baseUrl + 'account/register', registrationData)
       .pipe(
         map((user: User) => {
-          if (user) {
+          this.user = user;
+          if (this.user) {
+            const roles = this.fetchDecodedToken(this.user);
+            this.user.roles = roles;
             const _user = localStorage.setItem(
               'user',
-              JSON.stringify(user as User)
+              JSON.stringify(this.user as User)
             );
-            this.setCurrentUser(user);
+            this.setCurrentUser(this.user);
           }
-          return user;
+          return this.user;
         })
       );
   }

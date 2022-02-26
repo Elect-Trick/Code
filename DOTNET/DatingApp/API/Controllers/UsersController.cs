@@ -31,7 +31,6 @@ namespace API.Controllers
         }
 
 
-
         [HttpGet]
         // Making your code Asynchronous helps to serve multiple requests with ease
         // Each thread is passed on to the next available thread 

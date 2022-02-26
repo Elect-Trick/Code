@@ -1,19 +1,21 @@
 using Microsoft.AspNetCore.Authorization;
 using API.Extensions;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace API.Entities
 {
     // [Authorize]
     [Table("Users")]
 
-    public class AppUser
+    public class AppUser : IdentityUser<int>
     {
-        
-    public int Id { get; set; }
-        // Keep it simple, ID will be used for auto incrementation and Primary Key in our DB
-        public string UserName { get; set; }
-        public byte[] PasswordHash { get; set; }
+
+        // IdentityUser already implements the ID,username and Password hash 
+        // public int Id { get; set; }
+        //     // Keep it simple, ID will be used for auto incrementation and Primary Key in our DB
+        //     public string UserName { get; set; }
+        //     public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string KnownAs { get; set; }
@@ -33,13 +35,15 @@ namespace API.Entities
         public ICollection<UserLike> LikedUsers { get; set; }
         public ICollection<Message> MessageSent { get; set; }
         public ICollection<Message> MessagesRecieved { get; set; }
-
-    
-
+        public ICollection<AppUserRole> UserRoles { get; set; }
 
 
 
-}
+
+
+
+
+    }
 }
 
 

@@ -38,6 +38,10 @@
           <a class="nav-link" routerLink="/messages" routerLinkActive="active"
             >Messages</a
           >
+        </li><li  class="nav-item">
+          <a *appHasRole='["Admin","Moderator"]' class="nav-link" routerLink="/admin" routerLinkActive="active"
+            >Admin</a
+          >
         </li>
       </ul>
     </ng-container>
