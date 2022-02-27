@@ -44,6 +44,13 @@ namespace API.Data
             .SingleOrDefaultAsync();
         }
 
+      
+
+        public async Task<string> GetMemberGender(string username)
+        {
+            return await _context.Users.Where(x=>x.UserName== username).Select(x=>x.Gender).FirstOrDefaultAsync();
+        }
+
         public async Task<PagedList<MemberDTO>> GetMembersAsync(UserParams userParams)
         {
             // Using projection renders the Include method obselete since it handles the mapping
@@ -85,11 +92,11 @@ namespace API.Data
             return await _context.Users.Include(p => p.Photos).ToListAsync();
         }
 
-        public async Task<bool> SaveAllAsync()
-        {
-            // Checks if something has changed and then returns greater than 0 if so 
-            return _context.SaveChanges() > 0;
-        }
+        // public async Task<bool> SaveAllAsync()
+        // {
+        //     // Checks if something has changed and then returns greater than 0 if so 
+        //     return _context.SaveChanges() > 0;
+        // }
 
         public void Update(AppUser user)
         {

@@ -12,17 +12,14 @@ namespace API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
-           services.AddSingleton<PresenceTracker>();
-        //    There are other ways of implement the above service for scalibilty  
+            services.AddSingleton<PresenceTracker>();
+            //    There are other ways of implement the above service for scalibilty  
             services.AddScoped<IPhotoService, PhotosService>();
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
-            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<LogUserActivity>();
-            services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped<ILikesRepository, LikesRepository>();
-
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             // Lamda expressions allows to pass parameters as expresions, brings convenience. 
             services.AddDbContext<DataContext>(options =>
             {
