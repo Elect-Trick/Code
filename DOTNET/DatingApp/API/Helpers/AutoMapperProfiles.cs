@@ -2,6 +2,8 @@ using API.DTOs;
 using AutoMapper;
 using API.Entities;
 using API.Extensions;
+using API.SignalR;
+using Microsoft.AspNetCore.SignalR;
 
 namespace API.Helpers
 {
@@ -21,6 +23,7 @@ namespace API.Helpers
             CreateMap<MemberUpdateDTO, AppUser>();
             CreateMap<RegisterDTO, AppUser>();
             CreateMap<RegisterDTO, AppUser>();
+            CreateMap<DateTime, DateTime>().ConvertUsing(date=>DateTime.SpecifyKind(date, DateTimeKind.Utc));
             CreateMap<Message, MessageDTO>().ForMember(dest => dest.SenderPhotoURL, opt => opt.MapFrom(src => src.Sender.Photos.FirstOrDefault(x => x.isMain).Url)).ForMember(dest => dest.RecipientPhotoUrl, opt => opt.MapFrom(src => src.Recipient.Photos.FirstOrDefault(x => x.isMain).Url));
         }
 

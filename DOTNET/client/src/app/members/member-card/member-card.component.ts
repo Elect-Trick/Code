@@ -1,3 +1,4 @@
+import { PresenceService } from './../../Services/presence.service';
 import { ToastrService } from 'ngx-toastr';
 import { MembersService } from 'src/app/Services/members.service';
 import { ActivatedRoute } from '@angular/router';
@@ -15,10 +16,14 @@ export class MemberCardComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private memberService: MembersService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public presenceService: PresenceService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.presenceService.onlineUsers$.pipe().subscribe(res=>{
+    });
+  }
 
   addLike(member: Member) {
     this.memberService.addLike(member.username).subscribe((res) => {

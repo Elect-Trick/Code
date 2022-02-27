@@ -1,7 +1,7 @@
 using Microsoft.OpenApi.Models;
 using API.Middleware;
 using API.Extensions;
-
+using API.SignalR;
 
 namespace API
 {
@@ -42,6 +42,8 @@ namespace API
             // Ordering doesn't matter here but does in the Configure method
             services.AddControllers();
             services.AddCors();
+            services.AddSignalR();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
@@ -57,7 +59,7 @@ namespace API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
             }
-            app.UseCors(corsPolicy => corsPolicy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+            app.UseCors(corsPolicy => corsPolicy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4200"));
             app.UseHttpsRedirection();
             app.UseRouting();
 
@@ -69,7 +71,10 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<PresenceHub>("/hubs/presence");
+                endpoints.MapHub<MessageHub>("/hubs/message");
             });
+            
         }
     }
 }

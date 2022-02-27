@@ -1,5 +1,8 @@
+import { PasswordValidator } from './../../register/password-validator';
+import { AccountService } from './../../Services/account.service';
+import { PresenceService } from './../../Services/presence.service';
 import { Member } from 'src/app/models/member.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MembersService } from 'src/app/Services/members.service';
 import {
@@ -11,34 +14,46 @@ import { ViewChild } from '@angular/core';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { MessasgeService } from 'src/app/Services/messasge.service';
 import { Message } from 'src/app/models/message.model';
+import { User } from 'src/app/models/user.model';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-member-detail',
   templateUrl: './member-detail.component.html',
   styleUrls: ['./member-detail.component.css'],
 })
-export class MemberDetailComponent implements OnInit {
+export class MemberDetailComponent implements OnInit, OnDestroy {
   member!: Member;
-@ViewChild('memberTabs',{static: true}) memberTabs!:  TabsetComponent;
-activeTab!: TabDirective;
+  @ViewChild('memberTabs', { static: true }) memberTabs!: TabsetComponent;
+  activeTab!: TabDirective;
   galleryOptions: NgxGalleryOptions[] = [];
   galleryImages: NgxGalleryImage[] = [];
-  messages: Message[]=[];
+  messages: Message[] = [];
+  user!: User;
   constructor(
     private messageService: MessasgeService,
     private memberService: MembersService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
-  ) {}
+    private router: Router,
+    public presenceService: PresenceService,
+    private accountService: AccountService,
+  ) {
+    this.accountService.currentUser$.pipe().subscribe((user) => {
+      this.user = user;
+      this.router.routeReuseStrategy.shouldReuseRoute = ()=>false;
+    });
+    this.messageService.messageThread$.pipe().subscribe();
+    console.log('User in constru', this.user);
+  }
+
   // We need the activated route in order to pass a paramter in our URL
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(data =>{
+    this.activatedRoute.data.subscribe((data) => {
       this.member = data['member'];
-    })
+    });
 
-    this.activatedRoute.queryParams.subscribe(params =>{
-      params['tab'] ? this.activateTab(params['tab']): this.activateTab(0)
-
+    this.activatedRoute.queryParams.subscribe((params) => {
+      params['tab'] ? this.activateTab(params['tab']) : this.activateTab(0);
     });
     this.galleryOptions = [
       {
@@ -51,33 +66,32 @@ activeTab!: TabDirective;
       },
     ];
     this.galleryImages = this.getImages();
-
-
   }
 
-  activateTab(tabId: number)
-  {
-    this.memberTabs.tabs[tabId].active =true;
+  activateTab(tabId: number) {
+    this.memberTabs.tabs[tabId].active = true;
+    this.getImages();
   }
 
-  onTabChange(data: TabDirective){
+  onTabChange(data: TabDirective) {
     this.activeTab = data;
-    if(this.activeTab.heading ==="Messages" && this.messages.length===0)
-    {
-      this.getMessasges();
+    if (this.activeTab.heading === 'Messages' && this.messages.length === 0) {
+      this.messageService.createHubConnection(JSON.parse(this.user as any), this.member.username);
+    } else {
+      this.messageService.stopHubConnection();
     }
   }
-  getMessasges()
-  {
-    this.messageService.getMessageThread(this.member.username).subscribe(messages=>{
-      this.messages = messages;
 
-      console.log("Messages",this.messages);
-    });
+  getMessasges() {
+    this.messageService
+      .getMessageThread(this.member.username)
+      .subscribe((messages) => {
+        this.messages = messages;
+
+      });
   }
 
   getImages(): NgxGalleryImage[] {
-
     // Adding images from the db to an array we will use in the front end.
     const galleryImages: NgxGalleryImage[] = [];
     for (let index = 0; index < this.member.photos.length; index++) {
@@ -90,6 +104,9 @@ activeTab!: TabDirective;
     return galleryImages;
   }
 
+  ngOnDestroy(): void {
+    this.messageService.stopHubConnection();
+  }
   // getMember() {
   //   this.activatedRoute.paramMap.subscribe((paraMap) => {
   //     if (!paraMap.has('username')) {

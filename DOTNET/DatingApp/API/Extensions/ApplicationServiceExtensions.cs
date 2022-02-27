@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using API.Interfaces;
 using API.Services;
 using API.Helpers;
+using API.SignalR;
 
 namespace API.Extensions
 {
@@ -11,6 +12,8 @@ namespace API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
+           services.AddSingleton<PresenceTracker>();
+        //    There are other ways of implement the above service for scalibilty  
             services.AddScoped<IPhotoService, PhotosService>();
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.AddScoped<IUserRepository, UserRepository>();

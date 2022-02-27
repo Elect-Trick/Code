@@ -4,6 +4,7 @@ using API.Data;
 using API.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 namespace API.Extensions
@@ -35,6 +36,19 @@ namespace API.Extensions
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"])),
                     ValidateIssuer = false,
                     ValidateAudience = false,
+                };
+
+                options.Events = new JwtBearerEvents{
+                    OnMessageReceived = Context =>{
+                        var accessToken = Context.Request.Query["access_token"];
+                        var path = Context.HttpContext.Request.Path;
+                        if(!string.IsNullOrEmpty(accessToken)&&path.StartsWithSegments("/hubs"))
+                        {
+                            Context.Token = accessToken;
+                        }
+
+                        return Task.CompletedTask;
+                    }
                 };
             });
 

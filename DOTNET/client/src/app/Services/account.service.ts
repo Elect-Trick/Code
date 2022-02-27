@@ -1,3 +1,4 @@
+import { PresenceService } from './presence.service';
 import { User } from './../models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
@@ -15,7 +16,7 @@ export class AccountService implements OnDestroy {
   user!: User;
   private currentUserSource = new ReplaySubject<any>(1);
   currentUser$ = this.currentUserSource.asObservable();
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private presence: PresenceService) {}
   ngOnDestroy(): void {
     if (this.currentUser$) {
       this.currentUserSource.next(null);
@@ -41,6 +42,7 @@ export class AccountService implements OnDestroy {
             JSON.stringify(this.user as User)
           );
           this.setCurrentUser(this.user);
+          this.presence.createHubConnection(this.user);
         }
         return this.user;
       })
@@ -61,6 +63,7 @@ export class AccountService implements OnDestroy {
               JSON.stringify(this.user as User)
             );
             this.setCurrentUser(this.user);
+            this.presence.createHubConnection(this.user);
           }
           return this.user;
         })
@@ -86,5 +89,7 @@ export class AccountService implements OnDestroy {
   logout() {
     localStorage.removeItem('user');
     this.setCurrentUser(null);
+    this.presence.stopHubConnection();
   }
+
 }
