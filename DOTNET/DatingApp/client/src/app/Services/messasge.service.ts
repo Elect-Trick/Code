@@ -1,3 +1,4 @@
+import { BusyService } from './busy.service';
 import { take } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { AccountService } from './account.service';
@@ -23,13 +24,15 @@ export class MessasgeService {
 
   constructor(
     private http: HttpClient,
-    private accoountService: AccountService
+    private accoountService: AccountService,
+    private busyService: BusyService
   ) {
     this.accoountService.currentUser$.subscribe((user) => {
       this.user = user;
     });
   }
   createHubConnection(user: User, otherUsername: string) {
+    this.busyService.busy();
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(this.hubUrl + 'message?user=' + otherUsername, {
         accessTokenFactory: () => user.token,
@@ -39,8 +42,12 @@ export class MessasgeService {
       .withAutomaticReconnect()
       .build();
 
+      // Returns a promise
     this.hubConnection.start().catch((error) => {
+
       console.log(error);
+    }).finally(()=>{
+      this.busyService.idle();
     });
 
     this.hubConnection.on('RecieveMessageThread', (messages) => {
@@ -68,7 +75,12 @@ this.messageThreadSource.next([...messages, _messages])
   }
 
   stopHubConnection() {
-    if (this.hubConnection) this.hubConnection.stop();
+    if (this.hubConnection){
+      this.busyService.idle();
+    } this.hubConnection.stop();
+
+
+
   }
 
   getMessages(pageNumber: number, pageSize: number, container: string) {
