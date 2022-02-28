@@ -33,7 +33,6 @@ export class PhotoEditorComponent implements OnInit {
   ngOnInit(): void {
     this.accountService.currentUser$.pipe(tap()).subscribe((_user) => {
       this.user = JSON.parse(_user);
-      console.log('Photo Edit', this.user);
     });
 
     this.configureUploader();

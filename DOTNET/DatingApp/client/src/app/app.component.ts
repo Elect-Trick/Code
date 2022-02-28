@@ -21,15 +21,12 @@ export class AppComponent implements OnInit, OnDestroy {
     private accountService: AccountService,
     private presenceService: PresenceService
   ) {
-    console.log("App construct");
   }
   ngOnDestroy(): void {
     this.accountService.setCurrentUser("" as any);
   }
 
-  ngOnInit() {
-    console.log("Rppt comp ran");
-    this.setCurrentUser();
+  ngOnInit() {    this.setCurrentUser();
   }
 
   setCurrentUser() {
@@ -38,7 +35,6 @@ export class AppComponent implements OnInit, OnDestroy {
     if(_user)
     {
       this.accountService.setCurrentUser(_user);
-      console.log('Type',typeof(JSON.parse(_user)));
       this.presenceService.createHubConnection(JSON.parse(_user));
 
     }

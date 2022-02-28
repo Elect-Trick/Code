@@ -43,7 +43,6 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
       this.router.routeReuseStrategy.shouldReuseRoute = ()=>false;
     });
     this.messageService.messageThread$.pipe().subscribe();
-    console.log('User in constru', this.user);
   }
 
   // We need the activated route in order to pass a paramter in our URL

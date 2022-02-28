@@ -21,47 +21,44 @@ validationErrors:  string[] =[];
     // Error 404
     this.http.get(this.baseUrl + 'errorhandler/not-found').subscribe(response=>{
       this.router.navigateByUrl('');
-      console.log(response);
 
     },error =>{
-      console.log(error);
     });
   } getUnAuthorizedError(){
     // Error 401
     this.http.get(this.baseUrl + 'errorhandler/auth').subscribe(response=>{
-      console.log(response);
 
     },error =>{
-      console.log(error);
+      // console.log(error);
     });
   }
    getBadRequestError(){
     //  Error 400
     this.http.get(this.baseUrl + 'errorhandler/bad-request').subscribe(response=>{
-      console.log(response);
+      // console.log(response);
 
     },error =>{
-      console.log(error);
+      // console.log(error);
     });
   }
 
   getInternalServerError(){
     // Error 500
     this.http.get(this.baseUrl + 'errorhandler/server-error').subscribe(response=>{
-      console.log(response);
+      // console.log(response);
 
     },error =>{
-      console.log(error);
+      // console.log(error);
     });
   }
 
   getValidationError(){
     // Error 400
     this.http.post(this.baseUrl + 'account/register',{}).subscribe(response=>{
-      console.log(response);
+      // console.log(response);
 
     },error =>{
-      console.log(error);
+      // console.log(error);
       this.validationErrors = error;
 
     });
