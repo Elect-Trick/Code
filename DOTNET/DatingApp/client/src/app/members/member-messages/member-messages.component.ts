@@ -1,4 +1,3 @@
-import { of } from 'rxjs/internal/observable/of';
 import { ConfirmService } from './../../Services/confirm.service';
 import { AccountService } from './../../Services/account.service';
 import { NgForm } from '@angular/forms';
