@@ -12,7 +12,7 @@ namespace API.DTOs
         public string Username { get; set; }
         public int Age { get; set; }
         public string KnownAs { get; set; }
-        public DateTime ProfileRegistered { get; set; }
+        public DateTime ProfileRegistered { get; set; }=DateTime.UtcNow;
         public DateTime LastActive { get; set; }
         public string Gender { get; set; }
         public string PhotoUrl { get; set; }
