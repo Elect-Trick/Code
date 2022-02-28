@@ -75,12 +75,11 @@ this.messageThreadSource.next([...messages, _messages])
   }
 
   stopHubConnection() {
-    if (this.hubConnection){
-      this.busyService.idle();
-    } this.hubConnection.stop();
+    if (this.hubConnection)
+    {this.busyService.idle();
+      this.hubConnection.stop();
 
-
-
+    }
   }
 
   getMessages(pageNumber: number, pageSize: number, container: string) {
