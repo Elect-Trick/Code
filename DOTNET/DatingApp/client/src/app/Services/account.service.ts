@@ -29,7 +29,7 @@ export class AccountService implements OnDestroy {
 
   }
 
-  login(loginData: any) {
+  login(loginData: User) {
     return this.http.post<User>(this.baseUrl + 'account/login', loginData).pipe(
       map((response: User) => {
         this.user = response;

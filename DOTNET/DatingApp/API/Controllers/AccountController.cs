@@ -17,8 +17,10 @@ namespace API.Controllers
         private readonly IMapper _mapper;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
-        public AccountController(ITokenService tokenService, IMapper mapper, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        private readonly IUnitOfWork _unitOfWork;
+        public AccountController(ITokenService tokenService, IMapper mapper, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IUnitOfWork unitOfWork)
         {
+            _unitOfWork = unitOfWork;
             _userManager = userManager;
             _signInManager = signInManager;
             _mapper = mapper;
@@ -38,12 +40,15 @@ namespace API.Controllers
             // This will destroy the newly created instance once we are done
             // using var hmac = new System.Security.Cryptography.HMACSHA512();
             user.UserName = registrationData.Username.ToLower();
+            user.LastActive = DateTimeOffset.UtcNow;
+            user.ProfileRegistered = DateTimeOffset.UtcNow;
             // We use this to generate a Hash key and then obtain the password Salt from the hmac.key
             // For Indentity we do not need these as they are managed for us
             // user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registrationData.Password));
             // user.PasswordSalt = hmac.Key;
 
             // Adding data to the table.
+
 
             var result = await _userManager.CreateAsync(user, registrationData.Password);
             if (!result.Succeeded)
@@ -66,7 +71,7 @@ namespace API.Controllers
                 KnownAs = user.KnownAs,
                 Gender = user.Gender,
                 ProfileRegistered = user.ProfileRegistered,
-                LastActive = user.LastActive
+                LastActive = DateTimeOffset.UtcNow
 
 
 
@@ -93,7 +98,7 @@ namespace API.Controllers
             //     // Comapring each character in the hash
             //     if (computedHash[i] != user.PasswordHash[i])
             //     {
-            //         return BadRequest("Invalid Password");
+            //         return BadReq`uest("Invalid Password");
             //     }
 
             // }
@@ -107,6 +112,11 @@ namespace API.Controllers
             // var roleResult = await _userManager.AddToRoleAsync(user, "Member");
 
             // if(!roleResult.Succeeded)return BadRequest(roleResult.Errors);
+            var toUpdate = await _unitOfWork.UserRepository.GetUserByUsernameAsync(loginData.Username);
+            toUpdate.LastActive = DateTime.Now;
+            _unitOfWork.UserRepository.Update(toUpdate);
+            await _unitOfWork.Complete();
+
 
             return new UserDTO
             {
@@ -115,9 +125,7 @@ namespace API.Controllers
                 PhotoUrl = user.Photos?.FirstOrDefault(x => x.isMain)?.Url,
                 KnownAs = user.KnownAs,
                 Gender = user.Gender,
-                LastActive = user.LastActive
-
-
+                LastActive = toUpdate.LastActive
             };
 
         }

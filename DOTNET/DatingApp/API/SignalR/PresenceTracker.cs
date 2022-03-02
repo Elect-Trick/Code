@@ -28,7 +28,7 @@ namespace API.SignalR
             }
 
         }
-        public Task UserDisconnected(string username, string connectionId)
+        public Task<bool> UserDisconnected(string username, string connectionId)
         {
             bool isOffline=false;
 
@@ -39,6 +39,7 @@ namespace API.SignalR
                 OnlineUsers.Remove(username);
                 isOffline = true;
             }
+            
             return Task.FromResult(isOffline);
         }
 // This is all happening in memory and not our DB 

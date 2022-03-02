@@ -18,23 +18,30 @@ namespace API.SignalR
         {
 
             var isOnline = await PresenceTracker.UserConnected(Context.User.GetUsername(), Context.ConnectionId);
-            if(isOnline)
-            await Clients.Others.SendAsync("UserIsOnline", Context.User.GetUsername());
+            if (isOnline)
+                await Clients.Others.SendAsync("UserIsOnline", Context.User.GetUsername());
 
             var currentUsers = await PresenceTracker.GetOnlineUsers();
+            
             await Clients.Caller.SendAsync("GetOnlineUsers", currentUsers);
         }
 
-        public override async Task OnDisconnectedAsync(Exception ex)
+        public override async Task<bool> OnDisconnectedAsync(Exception ex)
         {
-         
-           var isOffline=  await PresenceTracker.UserConnected(Context.User.GetUsername(), Context.ConnectionId);
-           if(isOffline)
-            await Clients.Others.SendAsync("UserIsOffline", Context.User.GetUsername());
+            var userName = Context.User.GetUsername();
+            var isOffline = await PresenceTracker.UserDisconnected(userName, Context.ConnectionId);
+            if (isOffline)
+            {
+                await Clients.Others.SendAsync("UserIsOffline", Context.User.GetUsername());
+                return true;
+
+
+            }
 
             // var currentUsers = await PresenceTracker.GetOnlineUsers();
             // await Clients.All.SendAsync("GetOnlineUsers", currentUsers);
             await base.OnDisconnectedAsync(ex);
+            return false;
         }
     }
 }

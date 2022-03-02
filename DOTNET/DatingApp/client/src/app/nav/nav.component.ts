@@ -1,3 +1,4 @@
+import { PresenceService } from './../Services/presence.service';
 import { MemberEditComponent } from './../members/member-edit/member-edit.component';
 import { PhotoEditorComponent } from './../members/photo-editor/photo-editor.component';
 import { take, tap } from 'rxjs/operators';
@@ -19,7 +20,7 @@ import { Input } from '@angular/core';
 })
 export class NavComponent implements OnInit, OnDestroy {
   accountSub!: Subscription;
-  memberSub! : Subscription;
+  memberSub!: Subscription;
   member!: Member;
   model: any = {};
   user!: Member;
@@ -29,26 +30,23 @@ export class NavComponent implements OnInit, OnDestroy {
   currentUser$: Observable<User> | undefined;
   user2!: MemberEditComponent;
 
-
   constructor(
     public accountService: AccountService,
     private memberService: MembersService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private presenceService: PresenceService
   ) {
-   this.accountSub = this.accountService.currentUser$.subscribe((res) => {
+    this.accountSub = this.accountService.currentUser$.subscribe((res) => {
       this.user = JSON.parse(res as any);
-      if(this.user)
-      { this.memberSub= this.memberService.getMember(this.user.username).subscribe((res:Member)=>{
-
-          this.profilePic = res.photoUrl;
-          this.knownAs = res.knownAs;
-        });
-
+      if (this.user) {
+        this.memberSub = this.memberService
+          .getMember(this.user.username)
+          .subscribe((res: Member) => {
+            this.profilePic = res.photoUrl;
+            this.knownAs = res.knownAs;
+          });
       }
-
-
-
     });
   }
 
@@ -58,14 +56,11 @@ export class NavComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   login() {
     this.accountSub = this.accountService.login(this.model).subscribe(
       (response) => {
-
         if (response) {
           this.router.navigateByUrl('/members');
 
@@ -79,6 +74,7 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   logout() {
+    this.presenceService.stopHubConnection();
     this.accountService.logout();
     this.model = {};
     this.router.navigateByUrl('/');

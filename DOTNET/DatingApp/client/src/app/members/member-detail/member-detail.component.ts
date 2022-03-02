@@ -41,30 +41,33 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     public presenceService: PresenceService,
-    private accountService: AccountService,
+    private accountService: AccountService
   ) {
     this.accountService.currentUser$.pipe().subscribe((user) => {
       this.user = user;
-      this.router.routeReuseStrategy.shouldReuseRoute = ()=>false;
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     });
     this.messageService.messageThread$.pipe().subscribe();
   }
 
   // We need the activated route in order to pass a paramter in our URL
   ngOnInit(): void {
-
- this.onlineUserSub= this.presenceService.onlineUsers$.pipe().subscribe(onlineUsers=>{
-this.userOnline = onlineUsers;
-    });
+    this.onlineUserSub = this.presenceService.onlineUsers$
+      .pipe()
+      .subscribe((onlineUsers) => {
+        this.userOnline = onlineUsers;
+      });
 
     this.activatedRoute.data.subscribe((data) => {
       this.member = data['member'];
-     if(this.userOnline.some(()=>this.member.username)){
-       this.member.lastActive = new Date(Date.now());
-     }
-     else{
-       return;
-     }
+      console.log("Last Active",this.member.lastActive.toLocaleDateString);
+      //  if(this.userOnline.some(()=>this.member.username)){
+      //    this.member.lastActive = new Date(Date.now());
+      //  }
+      //  else{
+      //    this.member.lastActive = this.member.lastActive;
+
+      //  }
     });
 
     this.activatedRoute.queryParams.subscribe((params) => {
@@ -91,7 +94,10 @@ this.userOnline = onlineUsers;
   onTabChange(data: TabDirective) {
     this.activeTab = data;
     if (this.activeTab.heading === 'Messages' && this.messages.length === 0) {
-      this.messageService.createHubConnection(JSON.parse(this.user as any), this.member.username);
+      this.messageService.createHubConnection(
+        JSON.parse(this.user as any),
+        this.member.username
+      );
     } else {
       this.messageService.stopHubConnection();
     }
@@ -102,7 +108,6 @@ this.userOnline = onlineUsers;
       .getMessageThread(this.member.username)
       .subscribe((messages) => {
         this.messages = messages;
-
       });
   }
 
@@ -120,9 +125,10 @@ this.userOnline = onlineUsers;
   }
 
   ngOnDestroy(): void {
-    this.messageService.stopHubConnection();
-    if(this.onlineUserSub)
-    this.onlineUserSub.unsubscribe();
+    if (this.messageService.hubConnection) {
+      this.messageService.stopHubConnection();
+    }
+    if (this.onlineUserSub) this.onlineUserSub.unsubscribe();
   }
   // getMember() {
   //   this.activatedRoute.paramMap.subscribe((paraMap) => {
