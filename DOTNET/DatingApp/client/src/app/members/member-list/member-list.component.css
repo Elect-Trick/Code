@@ -1,0 +1,16 @@
+pagination {
+  display: block ruby;
+}
+
+.form-group input,select {
+  display: inline;
+}
+
+
+button {
+  margin-left: 10px;
+  margin-bottom: 3px;
+  padding: 0.375rem 0.75rem !important;
+}
+
+
