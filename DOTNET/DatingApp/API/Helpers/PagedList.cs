@@ -29,7 +29,6 @@ namespace API.Helpers
         {
             var count = await sourceData.CountAsync();
             var items = await sourceData.Skip((pageNumber-1)* pageSize).Take(pageSize).ToListAsync();
-
             return new PagedList<T>(items,count,pageNumber,pageSize);
 
         }

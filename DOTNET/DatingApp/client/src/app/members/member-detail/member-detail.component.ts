@@ -60,7 +60,6 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
 
     this.activatedRoute.data.subscribe((data) => {
       this.member = data['member'];
-      console.log("Last Active",this.member.lastActive.toLocaleDateString);
       //  if(this.userOnline.some(()=>this.member.username)){
       //    this.member.lastActive = new Date(Date.now());
       //  }
