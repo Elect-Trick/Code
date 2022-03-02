@@ -9,25 +9,29 @@ import { Member } from 'src/app/models/member.model';
   styleUrls: ['./lists.component.css'],
 })
 export class ListsComponent implements OnInit {
-  members!:Member[];
+  members: Member[]=[];
   predicate = 'liked';
-  pageNumber=1;
+  pageNumber = 1;
   pageSize = 5;
   pagination!: Pagination;
   constructor(private memberService: MembersService) {}
 
   ngOnInit(): void {}
 
-  getLikes()
-  {
-    this.memberService.getLikes(this.predicate, this.pageNumber,this.pageSize).subscribe(res=>{
-      this.members = (res.result);
-      this.pagination = res.pagination;
-    });
+  getLikes() {
+    this.memberService
+      .getLikes(this.predicate, this.pageNumber, this.pageSize)
+      .subscribe((res) => {
+        if (res) {
+          this.members = res.result;
+          this.pagination = res.pagination;
+        } else {
+          return;
+        }
+      });
   }
 
-  pageChanged(event:any)
-  {
+  pageChanged(event: any) {
     this.pageNumber = event.page;
     this.getLikes();
   }

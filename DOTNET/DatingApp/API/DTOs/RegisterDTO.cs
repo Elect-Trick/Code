@@ -17,5 +17,8 @@ namespace API.DTOs
         [Required] public DateTime DateOfBirth { get; set; }
         [Required] public string City { get; set; }
         [Required] public string Country { get; set; }
+        [Required] public DateTimeOffset LastActive { get; set; } = DateTimeOffset.UtcNow;
+        [Required] public DateTimeOffset ProfileRegistered { get; set; } = DateTimeOffset.UtcNow;
+
     }
 }

@@ -1,56 +1,79 @@
 <div class="card">
-  <div class="card-body">
+  <div
+    class="card-body"
+    #scroller
+    style="overflow: scroll; height: 535px"
+    [scrollTop]="scroller.scrollHeight"
+  >
     <div *ngIf="(messageService.messageThread$ | async)?.length === 0">
       No Messages yet... say hi by using the message box below
     </div>
 
+    <ul
+      class="chat"
+      *ngIf="(messageService.messageThread$ | async)?.length != 0"
+    >
+      <li *ngFor="let message of messageService.messageThread$ | async">
+        <div>
+          <span class="chat-img float-right">
+            <img
+              src="{{ message.senderPhotoURL || './assets/user.png' }}"
+              alt="message.senderUsername"
+              class="rounded-circle"
+            />
+          </span>
 
-    <ul #scroller
-    style="overflow: scroll; height:500px;"
-    [scrollTop]="scroller.scrollHeight"
-     class="chat" *ngIf="(messageService.messageThread$ | async)?.length!= 0">
-    <li *ngFor="let message of (messageService.messageThread$ | async)">
-      <div>
-        <span class="chat-img float-right">
-          <img
-            src="{{ message.senderPhotoURL || './assets/user.png' }}"
-            alt="message.senderUsername"
-            class="rounded-circle"
-          />
-        </span>
-
-        <div class="chat-body">
-          <div class="header">
-            <small class="text-muted">
-              <span class="fa fa-clock-o">{{
-                message.messageSent | timeago
-              }}</span>
-              <span
-                class="text-danger"
-                *ngIf="!message.dateRead && message.recipientUsername === username"
-              >
-                (unread)
-              </span>
-              <span
-                class="text-success"
-                *ngIf="message.dateRead && message.recipientUsername === username"
-              >
-                (read){{message.dateRead | timeago}}
-              </span>
-            </small>
+          <div class="chat-body">
+            <div class="header">
+              <small class="text-muted">
+                <span class="fa fa-clock-o">{{
+                  message.messageSent| timeago
+                }}</span>
+                <span
+                  class="text-danger"
+                  *ngIf="
+                    !message.dateRead && message.recipientUsername === username
+                  "
+                >
+                  (unread)
+                </span>
+                <span
+                  class="text-success"
+                  *ngIf="
+                    message.dateRead && message.recipientUsername === username
+                  "
+                >
+                  (read){{ message.dateRead | timeago }}
+                </span>
+              </small>
+            </div>
+            <p>{{ message.content }}</p>
           </div>
-          <p>{{message.content}}</p>
         </div>
-      </div>
-    </li>
-  </ul>
+      </li>
+    </ul>
   </div>
   <div class="card-footer">
     <form #messageForm="ngForm" autocomplete="off" (ngSubmit)="sendMessage()">
       <div class="input-group">
-        <input  name="messageContent" required [(ngModel)]="messageContent" type="text" class="form-control input-sm" placeholder="Send a private message">
+        <input
+          name="messageContent"
+          required
+          [(ngModel)]="messageContent"
+          type="text"
+          class="form-control input-sm"
+          placeholder="Send a private message"
+        />
         <div class="input-group-append">
-          <button [disabled]="!messageForm.valid" class="btn btn-primary" style="margin-left: 10px;">Send</button>
+          <button
+            [disabled]="!messageForm.valid || loading"
+            class="btn btn-primary"
+            style="margin-left: 10px"
+          >
+          <i *ngIf="loading" class="fa fa-spinner"></i>
+            Send
+
+          </button>
         </div>
       </div>
     </form>

@@ -101,7 +101,6 @@ export class RegisterComponent implements OnInit {
 
         },
         (error) => {
-          console.log('Errors',error);
           this.validationErros = error;
           this.toastr.error(error.error);
         }
@@ -112,7 +111,6 @@ export class RegisterComponent implements OnInit {
   }
 
   cancel() {
-    console.log('cancelled');
 
     this.cancelRegistration.emit(false);
   }

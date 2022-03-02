@@ -57,7 +57,6 @@ if(this.memberSub){
 }  }
 
   ngOnInit(): void {
-    console.log("Member edit done");
 
   }
 

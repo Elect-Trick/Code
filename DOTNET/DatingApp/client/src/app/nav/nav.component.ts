@@ -61,7 +61,6 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log('Nav ran');
 
   }
 
@@ -69,7 +68,6 @@ export class NavComponent implements OnInit, OnDestroy {
     this.accountSub = this.accountService.login(this.model).subscribe(
       (response) => {
 
-        console.log("Login response",response);
         if (response) {
           this.router.navigateByUrl('/members');
 

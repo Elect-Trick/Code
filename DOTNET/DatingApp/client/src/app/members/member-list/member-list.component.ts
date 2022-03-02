@@ -18,7 +18,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class MemberListComponent implements OnInit, OnDestroy {
   membersObs!: Subscription;
-  members!: Member[];
+  members: Member[]=[];
   pagination!: Pagination;
   pageSize = 5;
   pageNumber = 1;
@@ -41,7 +41,6 @@ export class MemberListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log('Current User in members is', this.accountService.currentUser$);
     // this.getMember('park');
     this.getAllMembers();
 
@@ -61,7 +60,6 @@ export class MemberListComponent implements OnInit, OnDestroy {
 
   getMember(username: string) {
     this.memberService.getMember('park').subscribe((response) => {
-      console.log('Single Member', response);
     });
   }
   getAllMembers() {
@@ -70,10 +68,14 @@ export class MemberListComponent implements OnInit, OnDestroy {
     this.memberService
       .getMembers(this.userParams)
       .subscribe((response) => {
-        this.members = response.result;
+        if(response)
+        {
+          this.members = response.result;
+          this.pagination = response.pagination;
+        }else{
+          return;
+        }
 
-        this.pagination = response.pagination;
-        console.log('Pagination', response.pagination);
       });
   }
 }

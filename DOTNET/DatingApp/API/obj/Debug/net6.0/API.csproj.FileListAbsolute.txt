@@ -72,3 +72,5 @@ C:\Users\Njabulo Majenje\Documents\Code\DOTNET\DatingApp\API\bin\Debug\net6.0\Sw
 C:\Users\Njabulo Majenje\Documents\Code\DOTNET\DatingApp\API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\Njabulo Majenje\Documents\Code\DOTNET\DatingApp\API\obj\Debug\net6.0\API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Njabulo Majenje\Documents\Code\DOTNET\DatingApp\API\bin\Debug\net6.0\API.staticwebassets.runtime.json
+C:\Users\Njabulo Majenje\Documents\Code\DOTNET\DatingApp\API\bin\Debug\net6.0\Npgsql.dll
+C:\Users\Njabulo Majenje\Documents\Code\DOTNET\DatingApp\API\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
