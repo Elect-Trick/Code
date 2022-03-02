@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/wQHEHBToU+6zZ6MhNQLfxbzlXoebtiI/hl7oKTeFJ4=",
+  "Hash": "CBsR4FSkO9qJ0hFnwQDQw6FALytSFBUdCmiE5pZSAJs=",
   "Source": "API",
   "BasePath": "_content/API",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "API\\wwwroot",
       "Source": "API",
-      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\3rdpartylicenses.txt",
+      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\3rdpartylicenses.txt",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "3rdpartylicenses.txt",
       "AssetKind": "All",
@@ -34,10 +34,10 @@
       "OriginalItemSpec": "wwwroot\\3rdpartylicenses.txt"
     },
     {
-      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\assets\\user.png",
+      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\assets\\user.png",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "assets/user.png",
       "AssetKind": "All",
@@ -51,10 +51,10 @@
       "OriginalItemSpec": "wwwroot\\assets\\user.png"
     },
     {
-      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\fa-brands-400.228fe42a6e0f3a44.woff2",
+      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\fa-brands-400.228fe42a6e0f3a44.woff2",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "fa-brands-400.228fe42a6e0f3a44.woff2",
       "AssetKind": "All",
@@ -68,10 +68,10 @@
       "OriginalItemSpec": "wwwroot\\fa-brands-400.228fe42a6e0f3a44.woff2"
     },
     {
-      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\fa-brands-400.c5ed3fa1f3c781c7.ttf",
+      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\fa-brands-400.c5ed3fa1f3c781c7.ttf",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "fa-brands-400.c5ed3fa1f3c781c7.ttf",
       "AssetKind": "All",
@@ -85,10 +85,10 @@
       "OriginalItemSpec": "wwwroot\\fa-brands-400.c5ed3fa1f3c781c7.ttf"
     },
     {
-      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\fa-regular-400.07a54670d9a3dc90.ttf",
+      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\fa-regular-400.07a54670d9a3dc90.ttf",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "fa-regular-400.07a54670d9a3dc90.ttf",
       "AssetKind": "All",
@@ -102,10 +102,10 @@
       "OriginalItemSpec": "wwwroot\\fa-regular-400.07a54670d9a3dc90.ttf"
     },
     {
-      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\fa-regular-400.e640b07d7e5b6120.woff2",
+      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\fa-regular-400.e640b07d7e5b6120.woff2",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "fa-regular-400.e640b07d7e5b6120.woff2",
       "AssetKind": "All",
@@ -119,10 +119,10 @@
       "OriginalItemSpec": "wwwroot\\fa-regular-400.e640b07d7e5b6120.woff2"
     },
     {
-      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\fa-solid-900.18c4ece4fc6d34de.ttf",
+      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\fa-solid-900.18c4ece4fc6d34de.ttf",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "fa-solid-900.18c4ece4fc6d34de.ttf",
       "AssetKind": "All",
@@ -136,10 +136,10 @@
       "OriginalItemSpec": "wwwroot\\fa-solid-900.18c4ece4fc6d34de.ttf"
     },
     {
-      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\fa-solid-900.b29eaae78a9afccb.woff2",
+      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\fa-solid-900.b29eaae78a9afccb.woff2",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "fa-solid-900.b29eaae78a9afccb.woff2",
       "AssetKind": "All",
@@ -153,10 +153,10 @@
       "OriginalItemSpec": "wwwroot\\fa-solid-900.b29eaae78a9afccb.woff2"
     },
     {
-      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\fa-v4compatibility.a5c8337d137fc6ce.woff2",
+      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\fa-v4compatibility.a5c8337d137fc6ce.woff2",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "fa-v4compatibility.a5c8337d137fc6ce.woff2",
       "AssetKind": "All",
@@ -170,10 +170,10 @@
       "OriginalItemSpec": "wwwroot\\fa-v4compatibility.a5c8337d137fc6ce.woff2"
     },
     {
-      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\fa-v4compatibility.ed4433d28da5cb04.ttf",
+      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\fa-v4compatibility.ed4433d28da5cb04.ttf",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "fa-v4compatibility.ed4433d28da5cb04.ttf",
       "AssetKind": "All",
@@ -187,10 +187,10 @@
       "OriginalItemSpec": "wwwroot\\fa-v4compatibility.ed4433d28da5cb04.ttf"
     },
     {
-      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\favicon.ico",
+      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\favicon.ico",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",
@@ -204,10 +204,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\index.html",
+      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\index.html",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "index.html",
       "AssetKind": "All",
@@ -221,12 +221,12 @@
       "OriginalItemSpec": "wwwroot\\index.html"
     },
     {
-      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\main.c8b3c5e340aeaa60.js",
+      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\main.d22eea628e56b0a3.js",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
       "BasePath": "_content/API",
-      "RelativePath": "main.c8b3c5e340aeaa60.js",
+      "RelativePath": "main.d22eea628e56b0a3.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -235,13 +235,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\main.c8b3c5e340aeaa60.js"
+      "OriginalItemSpec": "wwwroot\\main.d22eea628e56b0a3.js"
     },
     {
-      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\polyfills.294bda16958ada30.js",
+      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\polyfills.294bda16958ada30.js",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "polyfills.294bda16958ada30.js",
       "AssetKind": "All",
@@ -255,10 +255,10 @@
       "OriginalItemSpec": "wwwroot\\polyfills.294bda16958ada30.js"
     },
     {
-      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\runtime.01fec06f14767966.js",
+      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\runtime.01fec06f14767966.js",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "runtime.01fec06f14767966.js",
       "AssetKind": "All",
@@ -272,10 +272,10 @@
       "OriginalItemSpec": "wwwroot\\runtime.01fec06f14767966.js"
     },
     {
-      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\styles.bc21eb9f4babc450.css",
+      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\styles.bc21eb9f4babc450.css",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "styles.bc21eb9f4babc450.css",
       "AssetKind": "All",

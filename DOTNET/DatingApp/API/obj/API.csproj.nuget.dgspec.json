@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\API.csproj": {}
+    "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\API.csproj": {
+    "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\API.csproj",
+        "projectPath": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\API.csproj",
         "packagesPath": "C:\\Users\\Njabulo Majenje\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\obj\\",
+        "outputPath": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\DatingApp\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Njabulo Majenje\\AppData\\Roaming\\NuGet\\NuGet.Config"
