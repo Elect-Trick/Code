@@ -43,6 +43,15 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
       this.router.routeReuseStrategy.shouldReuseRoute = ()=>false;
     });
     this.messageService.messageThread$.pipe().subscribe();
+    this.presenceService.onlineUsers$.pipe(take(1)).subscribe(onlineUsers=>{
+if(onlineUsers.some(()=>this.member?.username))
+{
+  alert('Member is active')
+}else{
+  alert("Member is not active");
+}
+
+    });
     console.log('User in constru', this.user);
   }
 

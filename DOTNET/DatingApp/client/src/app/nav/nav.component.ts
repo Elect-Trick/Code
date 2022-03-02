@@ -1,3 +1,4 @@
+import { PresenceService } from './../Services/presence.service';
 import { MemberEditComponent } from './../members/member-edit/member-edit.component';
 import { PhotoEditorComponent } from './../members/photo-editor/photo-editor.component';
 import { take, tap } from 'rxjs/operators';
@@ -34,7 +35,8 @@ export class NavComponent implements OnInit, OnDestroy {
     public accountService: AccountService,
     private memberService: MembersService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private presenceService: PresenceService
   ) {
    this.accountSub = this.accountService.currentUser$.subscribe((res) => {
       this.user = JSON.parse(res as any);
@@ -81,6 +83,7 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   logout() {
+    this.presenceService.stopHubConnection();
     this.accountService.logout();
     this.model = {};
     this.router.navigateByUrl('/');

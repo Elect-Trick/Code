@@ -41,7 +41,7 @@ export class PresenceService {
 
     this.hubConnection.on('UserIsOffline', (username) => {
       this.onlineUsers$.pipe(take(1)).subscribe((usernames) => {
-        this.onlineUserSource.next([...usernames.filter (x=>x !==username)]);
+        this.onlineUserSource.next([...usernames.filter(x=>x !== username)]);
       });
     });
     this.hubConnection.on('NewMessageReceived', ({ username, knownAs }) => {
