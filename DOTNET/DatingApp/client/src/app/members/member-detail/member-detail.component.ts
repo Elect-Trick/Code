@@ -16,6 +16,8 @@ import { MessasgeService } from 'src/app/Services/messasge.service';
 import { Message } from 'src/app/models/message.model';
 import { User } from 'src/app/models/user.model';
 import { take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-member-detail',
@@ -30,6 +32,9 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   galleryImages: NgxGalleryImage[] = [];
   messages: Message[] = [];
   user!: User;
+  userOnline!: any;
+  onlineUserSub!: Subscription;
+
   constructor(
     private messageService: MessasgeService,
     private memberService: MembersService,
@@ -47,8 +52,19 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
 
   // We need the activated route in order to pass a paramter in our URL
   ngOnInit(): void {
+
+ this.onlineUserSub= this.presenceService.onlineUsers$.pipe().subscribe(onlineUsers=>{
+this.userOnline = onlineUsers;
+    });
+
     this.activatedRoute.data.subscribe((data) => {
       this.member = data['member'];
+     if(this.userOnline.some(()=>this.member.username)){
+       this.member.lastActive = new Date(Date.now());
+     }
+     else{
+       return;
+     }
     });
 
     this.activatedRoute.queryParams.subscribe((params) => {
@@ -105,6 +121,8 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.messageService.stopHubConnection();
+    if(this.onlineUserSub)
+    this.onlineUserSub.unsubscribe();
   }
   // getMember() {
   //   this.activatedRoute.paramMap.subscribe((paraMap) => {

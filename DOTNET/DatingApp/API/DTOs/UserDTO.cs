@@ -12,5 +12,8 @@ namespace API.DTOs
         public string PhotoUrl { get; set; }
         public string KnownAs { get; set; }
         public string Gender { get; set; }
+        public DateTimeOffset LastActive { get; set; }
+        public DateTimeOffset ProfileRegistered { get; set; } = DateTimeOffset.UtcNow;
+
     }
 }

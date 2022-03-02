@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "SnL5mlOWU1IhY3NwQc/p9/+HNKGSVEX4JfvRo/MsF5I=",
+  "Hash": "wyJY2ib3n2WstPlUJTwESWpd8u3cpoM6nordbX2mzC4=",
   "Source": "API",
   "BasePath": "_content/API",
   "Mode": "Default",
@@ -221,12 +221,12 @@
       "OriginalItemSpec": "wwwroot\\index.html"
     },
     {
-      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\main.805e67cf51005bf3.js",
+      "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\main.07a91f3a3754fba3.js",
       "SourceId": "API",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\",
       "BasePath": "_content/API",
-      "RelativePath": "main.805e67cf51005bf3.js",
+      "RelativePath": "main.07a91f3a3754fba3.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -235,7 +235,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\main.805e67cf51005bf3.js"
+      "OriginalItemSpec": "wwwroot\\main.07a91f3a3754fba3.js"
     },
     {
       "Identity": "C:\\Users\\Njabulo Majenje\\Documents\\Code\\DOTNET\\DatingApp\\API\\wwwroot\\polyfills.294bda16958ada30.js",

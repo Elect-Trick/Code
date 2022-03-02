@@ -22,7 +22,7 @@ namespace API.Helpers
             var userId = resultContext.HttpContext.User.GetUserID();
             var uow = resultContext.HttpContext.RequestServices.GetService<IUnitOfWork>();
             var user = await uow.UserRepository.GetUserByIdAsync((userId));
-            user.LastActive = DateTime.UtcNow;
+            user.LastActive = DateTime.Today;
             await uow.Complete();
         }
     }
