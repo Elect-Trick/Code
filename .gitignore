@@ -2,3 +2,13 @@
 *.pack
 Code/
 Elect-Trick/
+*.dll
+*.dll
+*.pdb
+*.db
+*.sentinel
+*.json
+*.dll
+*.dll
+*.pdb
+*.cache
