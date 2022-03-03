@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+
+      <!-- <ion-back-button  [defaultHref]="'/places'"></ion-back-button> -->
+    </ion-buttons>
+    <ion-title class="ion-text-center">Offers</ion-title>
+    <ion-button slot="end" [routerLink]="['/places/offers/new']">
+      <ion-icon name="add" slot="icon-only"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+
+</ion-header>
+<ion-footer>
+  <ion-toolbar>
+    <app-tabs></app-tabs>
+  </ion-toolbar>
+</ion-footer>
+
+
+<ion-content >
+  <ion-grid class="ion-padding-top" *ngIf="isLoading===false">
+    <ion-row >
+      <ion-col size-lg="8" offset-lg="2">
+        <ion-list *ngIf="offers.length>0" >
+          <!-- <p *ngIf="">No offers found</p> -->
+          <ion-item-sliding  *ngFor="let x of offers " #slidingItem>
+
+          <ion-item  [routerLink]="['./',x.id]">
+            <ion-thumbnail slot="start">
+              <ion-img [src]="x.imageUrl"></ion-img>
+            </ion-thumbnail>
+            <ion-label>
+              <h2>{{x.title}}</h2>
+              <p>{{x.description}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item-options>
+            <ion-item-option (click)="onEdit(x.id, slidingItem)" color="danger" [routerLink]="['/places/offers/edit/'+x.id]">
+              <ion-icon name="create" slot="icon-only"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+
+        </ion-list>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>
