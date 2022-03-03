@@ -64,7 +64,6 @@ export class NavComponent implements OnInit, OnDestroy {
         if (response) {
           this.router.navigateByUrl('/members');
 
-          // this.model = {};
         }
       },
       (error) => {
@@ -78,5 +77,6 @@ export class NavComponent implements OnInit, OnDestroy {
     this.accountService.logout();
     this.model = {};
     this.router.navigateByUrl('/');
+
   }
 }

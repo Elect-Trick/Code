@@ -90,6 +90,7 @@ export class AccountService implements OnDestroy {
     localStorage.removeItem('user');
     this.setCurrentUser(null);
     this.presence.stopHubConnection();
+
   }
 
 }

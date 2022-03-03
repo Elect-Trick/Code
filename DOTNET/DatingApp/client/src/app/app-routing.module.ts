@@ -16,7 +16,7 @@ import { TestErrorsComponent } from './errors/test-errors/test-errors.component'
 import { MemberDetailResolver } from './resolvers/member-detail.resolver';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, },
+  { path: '', component: HomeComponent, redirectTo:'' },
   {
     path: '',
     runGuardsAndResolvers: 'always',

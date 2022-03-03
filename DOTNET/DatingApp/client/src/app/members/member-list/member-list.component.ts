@@ -29,7 +29,6 @@ export class MemberListComponent implements OnInit, OnDestroy {
   mappedMembers: Member[] = [];
   constructor(
     private memberService: MembersService,
-    private accountService: AccountService
   ) {
 
     this.userParams = this.memberService.getUserParams();
@@ -65,12 +64,15 @@ export class MemberListComponent implements OnInit, OnDestroy {
   getAllMembers() {
 
     this.memberService.setUserParams(this.userParams);
+    console.log("User Params",this.userParams);
+
     this.memberService
       .getMembers(this.userParams)
       .subscribe((response) => {
         if(response)
         {
           this.members = response.result;
+          console.log('Pagination response',response.result);
           this.pagination = response.pagination;
         }else{
           return;
