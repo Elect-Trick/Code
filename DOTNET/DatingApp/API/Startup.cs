@@ -60,9 +60,11 @@ namespace API
                 // app.UseSwagger();
                 // app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
             }
+            
             app.UseCors(corsPolicy => corsPolicy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4200"));
             app.UseHttpsRedirection();
-            app.UseRouting();
+            app.UseRouting(
+            );
 
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseAuthentication();
@@ -77,9 +79,9 @@ namespace API
                 endpoints.MapControllers();
                 endpoints.MapHub<PresenceHub>("/hubs/presence");
                 endpoints.MapHub<MessageHub>("/hubs/message");
-                endpoints.MapFallbackToController("Index","Fallback");
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
-            
+
         }
     }
 }
