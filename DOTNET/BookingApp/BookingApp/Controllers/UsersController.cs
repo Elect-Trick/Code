@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookingApp.Controllers
 {
-    // [Authorize]
     public class UsersController : BaseApiController
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -29,6 +28,7 @@ namespace BookingApp.Controllers
             _signInManager = signInManager;
             _userManager = userManager;
         }
+        // [Authorize]
 
         [HttpPost("login")]
         public async Task<ActionResult<UserModel>> login([FromBody] LoginModel loginModel)
@@ -45,7 +45,7 @@ namespace BookingApp.Controllers
             var loginResult = await _signInManager.CheckPasswordSignInAsync(user, loginModel.Password, false);
             if (!loginResult.Succeeded)
             {
-                return Unauthorized();
+                return Unauthorized(loginResult);
             }
 
             return new UserModel
@@ -73,13 +73,15 @@ namespace BookingApp.Controllers
             if (result.Succeeded)
             {
                 var _token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                // "Users" is the controller
                 var confirmationLink = Url.Action("ValidateEmail", "Users", new { userId = user.Id, token = _token }, Request.Scheme);
                 await _mailSender.SendEmailAsync(registerModel.EMail, "E-mail Verification", confirmationLink);
-                if(_token == null || confirmationLink == null)
+                if (_token == null || confirmationLink == null)
                 {
                     return BadRequest("Could not complete the reuquest");
                 }
-                return new RegisterModel{
+                return new RegisterModel
+                {
                     UserName = user.UserName,
                     EMail = user.Email
                 };
@@ -106,14 +108,48 @@ namespace BookingApp.Controllers
             var result = await _userManager.ConfirmEmailAsync(user, token);
             if (result.Succeeded)
             {
-                // return new ViewResult
-                // {
-                //     ContentType ="Thank you, the email has been verified"
-                // };
                 return Ok("Your email has been Verified, You can close this page and login");
             }
             return BadRequest(result.Errors);
 
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<ActionResult> GenerateResetToken(string email)
+        {
+
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return BadRequest("User was not found");
+            }
+            var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var confirmationLink = Url.Action("ValidateResetToken", "Users", new { email = user.Email, token = resetToken }, Request.Scheme);
+            var result = _mailSender.SendEmailAsync(email, "Password Reset", confirmationLink);
+            if (result.IsCompleted)
+            {
+                return Ok("Check your mails to confirm the request");
+
+            }
+            return BadRequest("This could not be done");
+
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult<string>> ValidateResetToken([FromQuery] string email, string token)
+        {
+
+            if (email == null || token == null)
+            {
+                return BadRequest("Email does not exist");
+            }
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user != null)
+            {
+                return token;
+            }
+            return BadRequest("Could not reset your password");
         }
 
     }
