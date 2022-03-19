@@ -31,8 +31,8 @@ namespace BookingApp
                    var userManager =  services.GetRequiredService<UserManager<ApplicationUser>>();
                    var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
                 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-                await context.Database.MigrateAsync();
-                   await Seed.SeedUsers(userManager,roleManager);
+                // await context.Database.MigrateAsync();
+                //    await Seed.SeedUsers(userManager,roleManager);
 
             }
             catch (Exception ex)

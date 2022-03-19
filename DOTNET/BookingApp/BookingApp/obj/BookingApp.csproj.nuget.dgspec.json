@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\BookingApp\\BookingApp\\BookingApp.csproj": {}
+    "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\BookingApp\\BookingApp\\BookingApp.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\BookingApp\\BookingApp\\BookingApp.csproj": {
+    "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\BookingApp\\BookingApp\\BookingApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\BookingApp\\BookingApp\\BookingApp.csproj",
+        "projectUniqueName": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\BookingApp\\BookingApp\\BookingApp.csproj",
         "projectName": "BookingApp",
-        "projectPath": "c:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\BookingApp\\BookingApp\\BookingApp.csproj",
+        "projectPath": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\BookingApp\\BookingApp\\BookingApp.csproj",
         "packagesPath": "C:\\Users\\Njabulo Majenje\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\BookingApp\\BookingApp\\obj\\",
+        "outputPath": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\BookingApp\\BookingApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Njabulo Majenje\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -21,6 +21,7 @@
           "net5.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
