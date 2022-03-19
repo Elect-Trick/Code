@@ -66,3 +66,13 @@ C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Microsoft.Extensions.Options.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\fit-g\.eslintrc.json
+C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\fit-g\angular.json
+C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\fit-g\capacitor.config.json
+C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\fit-g\e2e\tsconfig.json
+C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\fit-g\ionic.config.json
+C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\fit-g\package-lock.json
+C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\fit-g\package.json
+C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\fit-g\tsconfig.app.json
+C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\fit-g\tsconfig.json
+C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\fit-g\tsconfig.spec.json
