@@ -2,6 +2,5 @@
 export const environment = {
   production: true,
   baseUrl: 'api/',
-  liveFeedUrl: 'api/'
-
+  liveFeedUrl: 'api/',
 };

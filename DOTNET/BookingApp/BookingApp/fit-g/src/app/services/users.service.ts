@@ -1,5 +1,6 @@
-import { User } from './../models/user.model';
 /* eslint-disable @typescript-eslint/member-ordering */
+import { User } from './../models/user.model';
+
 import { Registration } from './../models/registration.model';
 import { LoginModel } from './../models/login.model';
 import { environment } from './../../environments/environment';
