@@ -3,15 +3,16 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Authorization;
 
 namespace API.Entities
 {
-    [Authorize]
     [Table("Users")]
 
     public class ApplicationUser : IdentityUser<int>
     {
+        public ApplicationUser()
+        {
+        }
 
         // IdentityUser already implements the ID,username and Password hash 
         // public int Id { get; set; }
@@ -23,7 +24,6 @@ namespace API.Entities
         public DateTimeOffset LastActive { get; set; }
         public string Gender { get; set; }
         public string Country { get; set; }
-        [JsonIgnore]
         public ICollection<UserRole> UserRoles { get; set; }
 
 
