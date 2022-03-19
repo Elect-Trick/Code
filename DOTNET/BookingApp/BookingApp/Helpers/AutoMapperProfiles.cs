@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using API.Entities;
 using AutoMapper;
 using BookingApp.models;
+using Microsoft.AspNetCore.Identity;
 
 namespace BookingApp.Helpers
 {
@@ -13,6 +14,7 @@ namespace BookingApp.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<RegisterModel, ApplicationUser>();
+            CreateMap<ApplicationUser, IdentityUser>();
 
         }
     }
