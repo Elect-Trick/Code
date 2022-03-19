@@ -32,6 +32,7 @@ namespace BookingApp
             services.AddApplicationServices(Configuration);
             services.AddTransient<IMailSender, SendGridService>();
             services.AddControllers();
+            services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookingApp", Version = "v1" });
