@@ -23,7 +23,6 @@ namespace API.Entities
         public DateTimeOffset LastActive { get; set; }
         public string Gender { get; set; }
         public string Country { get; set; }
-        [JsonIgnore]
         public ICollection<UserRole> UserRoles { get; set; }
 
 
