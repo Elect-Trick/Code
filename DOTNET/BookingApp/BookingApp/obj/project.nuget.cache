@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hPym8AHFD872PI/mb+/wUe1H8zz093W6cfcJTj2KCE79H2w46gimODA2zOZDaLoichmJ5ukMUyL/U1f98LQxLQ==",
+  "dgSpecHash": "1S0CFA/FDI6uKRJaIcdBRY5bCuBBsN2sm5myVXWSSsAe4Rz1yigKoVpBD0jgpBUQrhXE8vmN6xGLVCwjxagFdA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\BookingApp\\BookingApp\\BookingApp.csproj",
+  "projectFilePath": "c:\\Users\\Njabulo Majenje\\Documents\\GitHub\\Code\\DOTNET\\BookingApp\\BookingApp\\BookingApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Njabulo Majenje\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\Njabulo Majenje\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
