@@ -31,10 +31,6 @@ namespace BookingApp
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddApplicationServices(Configuration);
             services.AddTransient<IMailSender, SendGridService>();
-            // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            //     .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
-            // services.AddSignalR();
-            // services.AddCors();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -61,9 +57,12 @@ namespace BookingApp
 
             app.UseAuthorization();
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index", "FallBack");
 
             });
         }
