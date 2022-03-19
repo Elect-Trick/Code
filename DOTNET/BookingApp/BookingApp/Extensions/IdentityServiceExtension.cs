@@ -20,7 +20,7 @@ namespace API.Extensions
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
         {
             services.AddCors();
-            services.AddIdentityCore<ApplicationUser>(options =>
+            services.AddIdentityCore<IdentityUser>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 1;
@@ -31,7 +31,7 @@ namespace API.Extensions
 
             }).AddRoles<AppRole>()
             .AddRoleManager<RoleManager<AppRole>>()
-            .AddSignInManager<SignInManager<ApplicationUser>>()
+            .AddSignInManager<SignInManager<IdentityUser>>()
             .AddRoleValidator<RoleValidator<AppRole>>()
             .AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders();
 
