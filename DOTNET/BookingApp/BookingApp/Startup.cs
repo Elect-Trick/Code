@@ -53,9 +53,9 @@ namespace BookingApp
             app.UseRouting();
             app.UseCors(corsPolicy => corsPolicy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:4200"));
 
-            app.UseAuthentication();
+            // app.UseAuthentication();
 
-            app.UseAuthorization();
+            // app.UseAuthorization();
 
             app.UseDefaultFiles();
             app.UseStaticFiles();

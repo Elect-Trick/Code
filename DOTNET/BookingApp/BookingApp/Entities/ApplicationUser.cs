@@ -10,6 +10,9 @@ namespace API.Entities
 
     public class ApplicationUser : IdentityUser<int>
     {
+        public ApplicationUser()
+        {
+        }
 
         // IdentityUser already implements the ID,username and Password hash 
         // public int Id { get; set; }
