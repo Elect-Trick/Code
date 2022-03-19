@@ -1,0 +1,47 @@
+
+.left:checked ~ .character {
+  transform: rotateY(180deg);
+}
+.right:checked ~ .character {
+  transform: rotateY(360deg);
+}
+.character {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  height: 202px;
+  width: 190px;
+  margin:2em auto;
+  transform: translate(-50%,-50%);
+
+
+  background: transparent url("../../assets/sprite.png") 0 0 no-repeat ;
+  // border: 2px solid red;
+  animation: animate 1s steps(6) infinite;
+}
+.track{
+  position: fixed;
+  top: 42%;
+  height: 50%;
+  z-index: -1;
+  width: 500%;
+  background-repeat: repeat-x;
+
+  background: url('../../assets/road.png');
+  animation: road 2s linear infinite;
+}
+
+@keyframes road {
+ 100%{background-position: -1128px;}
+
+ 0%{background-position: -0;}
+}
+
+@keyframes animate {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: -1128px;
+  }
+}

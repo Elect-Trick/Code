@@ -1,0 +1,261 @@
+ion-content {
+  --ion-background-color: hsl(218, 58%, 53%);
+  overflow: hidden;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.top-row {
+  position: fixed;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  z-index: 2;
+  left: 0;
+  background-color: #4275cd;
+  top: 0;
+  padding-top: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  overflow: hidden;
+  top: 0;
+}
+
+.top-row .title {
+  z-index: 3;
+  text-shadow: 3px 3px 2px white, 3px 3px 2px red;
+}
+
+.top-row .title-image {
+  opacity: 0.5;
+  top: 100%;
+  position: absolute;
+  -webkit-transform: translate(0%, -50%);
+          transform: translate(0%, -50%);
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  left: 0;
+}
+
+.selection #sport-item {
+  --ion-background-color: whitesmoke;
+  text-shadow: 2px 2px 3px white, 2px 2px 3px red;
+}
+
+.selection #sport-item:hover {
+  --ion-background-color: orange;
+}
+
+.selection #country-item {
+  --ion-background-color: whitesmoke;
+  text-shadow: 2px 2px 6px white, 1px 1px 6px red;
+}
+
+.selection #country-item:hover {
+  --ion-background-color: orange;
+}
+
+.icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  left: 40%;
+  -webkit-box-shadow: 2px 2px black;
+          box-shadow: 2px 2px black;
+}
+
+.list-row {
+  position: absolute;
+  width: 100%;
+  top: 25%;
+}
+
+.circular-sb {
+  margin-top: 40%;
+  width: 220px;
+  border: 5px solid #00bfb6;
+  padding: 20px 10px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 900;
+  font-family: arial;
+  position: absolute;
+  color: #00bfb6;
+  z-index: 4;
+}
+
+.circle1 {
+  border: 5px solid #00bfb6;
+  position: absolute;
+  width: 25px;
+  padding: 20px;
+  border-radius: 50%;
+  right: -15px;
+  bottom: 23px;
+}
+
+.circle1:before {
+  content: "";
+  position: absolute;
+  width: 25px;
+  padding: 20px;
+  border-radius: 50%;
+  right: 0px;
+  bottom: 0px;
+  background: #fff;
+}
+
+.circle2 {
+  border: 5px solid #00bfb6;
+  position: absolute;
+  width: 5px;
+  padding: 10px 15px;
+  border-radius: 50%;
+  right: -60px;
+  bottom: 5px;
+}
+
+ion-slides {
+  height: 100%;
+  width: 90%;
+  overflow: hidden;
+}
+
+ion-card {
+  --background: #ffffff;
+  --color: #3880ff;
+  max-height: 90%;
+  width: 90%;
+  scroll-behavior: smooth;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.selected-icon {
+  left: 5%;
+  margin-bottom: 5%;
+  background: white;
+  position: absolute;
+}
+
+#fixture {
+  height: 100%;
+  display: contents;
+  background: #4275cd;
+  border-radius: 4px;
+}
+
+#fixture ion-avatar {
+  margin-left: 25%;
+}
+
+#item {
+  border-radius: 4px;
+}
+
+#country-col {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 50%;
+  padding: 0%;
+}
+
+#sport-item {
+  margin-left: 11%;
+  border-radius: 4px;
+}
+
+#country-item {
+  margin-right: 5%;
+  border-radius: 4px;
+}
+
+#card {
+  margin-left: 5%;
+}
+
+.top {
+  z-index: 2;
+  position: fixed;
+  width: 98.8%;
+  top: 0;
+  background-color: gray;
+  left: 0;
+}
+
+.top #country-selection-display {
+  --background: white;
+  height: 50%;
+  position: relative;
+}
+
+.no-data {
+  position: relative;
+  z-index: 2;
+  margin-top: 3%;
+  position: fixed;
+  background: white;
+  top: 20%;
+  left: 5%;
+}
+
+.no-data ion-card-content h3 {
+  margin-top: 5%;
+}
+
+.contents {
+  margin-top: 15%;
+  margin-bottom: 50%;
+  background: #4275cd;
+  border-radius: 4px;
+}
+
+.coin {
+  height: 171px;
+  width: 94px;
+  overflow: visible;
+  left: 49%;
+  position: absolute;
+  margin-top: 90%;
+  z-index: 10;
+  background: transparent url("../../assets/mustache-man.png");
+  -webkit-animation: coin 1s steps(12) infinite;
+          animation: coin 1s steps(12) infinite;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+@-webkit-keyframes coin {
+  100% {
+    background-position: -1128px, 0px;
+  }
+}
+
+@keyframes coin {
+  100% {
+    background-position: -1128px, 0px;
+  }
+}
+/*# sourceMappingURL=tab1.page.css.map */

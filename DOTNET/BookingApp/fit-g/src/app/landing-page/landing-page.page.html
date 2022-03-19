@@ -1,0 +1,229 @@
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col offset="2" size="8" size-md="4" offset-md="4">
+        <ion-img [src]="'../../assets/logo-red.png'"></ion-img>
+
+        <ion-button
+          class="login-button"
+          id="trigger-button"
+          expand="block"
+          fill="solid"
+          shape="sqaure"
+        >
+          Login
+        </ion-button>
+        <ion-button
+          class="register-button"
+          id="register-button"
+          expand="block"
+          fill="solid"
+          shape="sqaure"
+        >
+          Register
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-modal #loginModal trigger="trigger-button">
+    <ng-template>
+      <ion-content
+        ><ion-grid>
+          <ion-row>
+            <ion-col offset="1.7" size="9">
+              <ion-img [src]="'../../assets/logo-red.png'"></ion-img>
+
+              <ion-card>
+                <ion-card-content>
+                  <form (ngSubmit)="login()" [formGroup]="loginForm">
+                    <app-form-input
+                      [formControl]="$any(loginForm.controls.username)"
+                      [label]="'Username'"
+                    >
+                    </app-form-input>
+
+                    <app-form-input
+                      [formControl]="$any(loginForm.controls.password)"
+                      [label]="'Password'"
+                      [type]="'password'"
+                    >
+                    </app-form-input>
+
+                    <ion-button
+                      (click)="login()"
+                      expand="block"
+                      fill="solid"
+                      shape="sqaure"
+                      [disabled]="!loginForm.valid"
+                    >
+                      Log in
+                    </ion-button>
+                    <ion-button
+                      (click)="closeLoginModal()"
+                      expand="block"
+                      fill="solid"
+                      shape="sqaure"
+                    >
+                      Cancel
+                    </ion-button>
+                  </form>
+                  <div class="forgot-password">
+                    <ion-label
+                      (click)="presentResetModal()"
+                      id="forgot-password"
+                      >Forgot password?, click here</ion-label
+                    >
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal #registerModal trigger="register-button">
+    <ng-template>
+      <ion-content>
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col offset="1.5" size="9">
+              <ion-card>
+                <ion-card-content>
+                  <form [formGroup]="registerForm" (ngSubmit)="register()">
+                    <app-form-input
+                      [formControl]="$any(registerForm.controls.username)"
+                      [label]="'Username'"
+                    >
+                    </app-form-input>
+
+                    <app-form-input
+                      [formControl]="$any(registerForm.controls.password)"
+                      [label]="'Password'"
+                      [type]="'password'"
+                    >
+                    </app-form-input>
+                    <app-form-input
+                      [formControl]="$any(registerForm.controls.confirmPassword)"
+                      [label]="'ConfirmPassword'"
+                      [type]="'password'"
+                    >
+                    </app-form-input>
+                    <div
+                      *ngIf="registerForm?.getError('notmatched')"
+                      class="text-danger confirm"
+                    >
+                      Passwords do not match
+                    </div>
+                    <app-form-input
+                      [formControl]="$any(registerForm.controls.email)"
+                      [label]="'Email'"
+                    >
+                    </app-form-input>
+
+                    <ion-button
+                      expand="block"
+                      fill="solid"
+                      shape="sqaure"
+                      class="login-button"
+                      type="submit"
+                      [disabled]="!registerForm.valid"
+                    >
+                      Sign Up
+                    </ion-button>
+                    <ion-button
+                      class="register-button"
+                      (click)="closeRegisterModal()"
+                      expand="block"
+                      fill="solid"
+                      shape="sqaure"
+                    >
+                      Cancel
+                    </ion-button>
+                  </form>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  <ion-modal #resetPasswordModal trigger="forgot-password ">
+    <ng-template>
+      <ion-content>
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col offset="1.5" size="9">
+              <ion-card>
+                <ion-card-title>
+                  <ion-icon
+                    style="margin-top: 10%"
+                    size="large"
+                    name="lock-closed-outline"
+                  ></ion-icon>
+                  Password Reset
+                </ion-card-title>
+                <ion-card-content>
+                  <form
+                    [formGroup]="resetPasswordForm"
+                    (ngSubmit)="resetPassword()"
+                  >
+                    <app-form-input
+                      [formControl]="$any(resetPasswordForm.controls.email)"
+                      [label]="'Email'"
+                    >
+                    </app-form-input>
+
+                    <app-form-input
+                      [formControl]="$any(resetPasswordForm.controls.password)"
+                      [label]="'Password'"
+                      [type]="'password'"
+                    >
+                    </app-form-input>
+                    <app-form-input
+                      [formControl]="$any(resetPasswordForm.controls.confirmPassword)"
+                      [label]="'ConfirmPassword'"
+                      [type]="'password'"
+                    >
+                    </app-form-input>
+
+                    <div
+                      *ngIf="resetPasswordForm?.getError('notmatched')"
+                      class="text-danger confirm"
+                    >
+                      Passwords do not match
+                    </div>
+
+                    <ion-button
+                      expand="block"
+                      fill="solid"
+                      shape="sqaure"
+                      class="login-button"
+                      type="submit"
+                      [disabled]="!resetPasswordForm.valid || resetPasswordForm.getError('notmatched')"
+                    >
+                      Reset
+                    </ion-button>
+                    <ion-button
+                      expand="block"
+                      fill="solid"
+                      shape="sqaure"
+                      class="login-button"
+                      (click)="closeResetModal()"
+                    >
+                      Cancel
+                    </ion-button>
+                  </form>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

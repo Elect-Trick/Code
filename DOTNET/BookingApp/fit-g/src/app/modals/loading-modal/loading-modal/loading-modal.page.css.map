@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "loading-modal.page.scss"
+    ],
+    "names": [],
+    "file": "loading-modal.page.css"
+}

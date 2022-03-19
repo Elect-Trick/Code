@@ -1,0 +1,165 @@
+<ion-header [translucent]="false">
+  <ion-toolbar>
+    <ion-title slot="end"> Home </ion-title>
+    <ion-buttons slot="start">
+      <ion-buttons slot="start">
+        <ion-button
+          (click)="logout()"
+          expand="block"
+          fill="clear"
+          shape="round"
+        >
+        </ion-button
+        ><ion-icon size="large" name="log-out-outline"></ion-icon>
+      </ion-buttons>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-slides pager="true" [options]="slideOpts">
+  <ion-slide>
+    <ion-content [fullscreen]="true">
+      <ion-grid>
+        <div class="top-row">
+          <ion-row>
+            <ion-col offset-md="0" size-lg="12" size="12">
+              <h1 class="title">-- Fixtures --</h1>
+              <ion-img
+                class="title-image"
+                [src]="'../../assets/football-posts.png'"
+              ></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row class="selection">
+            <ion-col size="6" size-md="6">
+              <ion-item id="sport-item">
+                <ion-label>Sport</ion-label>
+                <ion-select
+                  [(ngModel)]="selectedSport"
+                  (ionChange)="print()"
+                  [compareWith]="compareWith"
+                  placeholder="Select Sport"
+                >
+                  <ion-select-option
+                    [value]="sport"
+                    #sport
+                    *ngFor="let sport of sports"
+                    >{{sport.sportName}}</ion-select-option
+                  >
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6" size-md="6">
+              <ion-item id="country-item">
+                <ion-icon size="medium" slot="start" name="location"></ion-icon>
+                <ion-label>Country</ion-label>
+                <ion-select
+                  [(ngModel)]="selectedSport.country"
+                  (ionChange)="getFixtures()"
+                >
+                  <ion-select-option *ngFor="let country of countries"
+                    >{{country.country_name}}</ion-select-option
+                  >
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <!-- Second row -->
+          <ion-row>
+            <ion-col class="icons" size="12" size-md="10" offset-md="0">
+              <ion-icon
+                style="margin-right: 10%"
+                size="large"
+                name="{{selectedSport.icon}}"
+              ></ion-icon>
+
+              <img
+                style="margin-left: 5%"
+                *ngIf="selectedSport.country"
+                src="../../assets/country-icons/{{selectedSport.country}}.png"
+              />
+
+              <ion-label>{{selectedSport.country}}</ion-label>
+            </ion-col>
+          </ion-row>
+        </div>
+        <!-- <ion-card class="no-data" *ngIf="fixtures.length ===0">
+          <ion-card-content>
+            <h3>No Data for your selection, try another region</h3>
+          </ion-card-content>
+        </ion-card> -->
+        <div class="no-data" *ngIf="fixtures.length ===0" >
+          <ion-row>
+            <ion-col size="12" size-md="5" offset-md="3.5">
+              <div class="circular-sb">
+                <ion-label>0 Fixtures found, try another region</ion-label>
+                <div class="circle1"></div>
+                <div class="circle2"></div>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="10" offset="2" size-md="4" offset-md="4">
+              <div  class="coin"></div>
+            </ion-col>
+          </ion-row>
+        </div>
+
+        <!-- <ion-row >
+          <ion-col size="6" offset="2" size-md="6">
+            <div class="circular-sb">
+              0 Fixtures found Kind Sir, Try another Region
+              <div class="circle1"></div>
+              <div class="circle2"></div></div
+          ></ion-col>
+        </ion-row> -->
+
+        <ion-row class="list-row">
+          <ion-col fixed size="12">
+            <ng-container>
+              <div>
+                <ion-list>
+                  <ion-card id="card" *ngFor="let fixture of fixtures">
+                    <ion-card-header>
+                      <ion-card-subtitle id="item">
+                        <ion-item id="fixture">
+                          <ion-col size="5">
+                            <ion-avatar>
+                              <ion-img
+                                [src]="fixture.event_home_team_logo"
+                              ></ion-img>
+                            </ion-avatar>
+                          </ion-col>
+                          <ion-col size="2" offset="0.5"> VS </ion-col>
+                          <ion-col size="5"
+                            ><ion-avatar>
+                              <ion-img
+                                [src]="fixture.event_away_team_logo"
+                              ></ion-img>
+                            </ion-avatar>
+                          </ion-col>
+                        </ion-item>
+                        <br />
+                      </ion-card-subtitle>
+                    </ion-card-header>
+                    <ion-card-content>
+                      <div class="fixture-date-time">
+                        <label for="">Date:{{fixture.event_date}}</label>
+                      </div>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-list>
+              </div>
+            </ng-container>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+  </ion-slide>
+  <ion-slide>
+    <h1>Slide 2</h1>
+    <ion-icon size="large" slot="end" name="football-outline"></ion-icon>
+  </ion-slide>
+  <ion-slide>
+    <h1>Slide 3</h1>
+  </ion-slide>
+</ion-slides>
