@@ -52,7 +52,7 @@ namespace BookingApp
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(corsPolicy => corsPolicy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:4200"));
+            app.UseCors(corsPolicy => corsPolicy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://fit-g.herokuapp.com/"));
 
             app.UseAuthentication();
 
