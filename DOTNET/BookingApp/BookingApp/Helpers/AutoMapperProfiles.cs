@@ -14,7 +14,6 @@ namespace BookingApp.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<RegisterModel, ApplicationUser>();
-            CreateMap<ApplicationUser, IdentityUser>();
 
         }
     }

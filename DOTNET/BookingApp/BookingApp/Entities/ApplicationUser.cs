@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Entities
 {
-    // [Authorize]
+    [Authorize]
     [Table("Users")]
 
     public class ApplicationUser : IdentityUser<int>
