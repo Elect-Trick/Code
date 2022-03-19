@@ -53,12 +53,7 @@ C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\obj\
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Humanizer.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Data\UserSeedData.json
-C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\System.Web.Cors.dll
-C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\System.Net.Http.Formatting.dll
-C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\System.Web.Http.dll
-C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\System.Web.Http.Cors.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Newtonsoft.Json.dll
-C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\MailKit.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\MimeKit.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\NETCore.MailKit.dll
