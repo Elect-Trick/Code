@@ -15,7 +15,6 @@ namespace BookingApp.Extensions
         {
 
             services.AddScoped<ITokenService, TokenService>();
-            services.AddSingleton<UrlFormatter>();
               services.AddDbContext<DataContext>(options =>
             {
 
