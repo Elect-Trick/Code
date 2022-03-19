@@ -26,14 +26,14 @@ namespace BookingApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           
+
             services.AddIdentityServices(Configuration);
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddApplicationServices(Configuration);
-services.AddTransient<IMailSender, SendGridService>();
+            services.AddTransient<IMailSender, SendGridService>();
             // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             //     .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
-
+            // services.AddSignalR();
             // services.AddCors();
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -64,6 +64,7 @@ services.AddTransient<IMailSender, SendGridService>();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
             });
         }
     }

@@ -1,6 +1,7 @@
 using System;
 using API.Services;
 using BookingApp.Data;
+using BookingApp.Helpers;
 using BookingApp.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +15,7 @@ namespace BookingApp.Extensions
         {
 
             services.AddScoped<ITokenService, TokenService>();
+            services.AddSingleton<UrlFormatter>();
               services.AddDbContext<DataContext>(options =>
             {
 

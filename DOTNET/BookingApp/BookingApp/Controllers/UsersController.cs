@@ -1,13 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using API.Entities;
 using AutoMapper;
 using BookingApp.Interfaces;
 using BookingApp.models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,8 +25,6 @@ namespace BookingApp.Controllers
             _signInManager = signInManager;
             _userManager = userManager;
         }
-        // [Authorize]
-
         [HttpPost("login")]
         public async Task<ActionResult<UserModel>> login([FromBody] LoginModel loginModel)
         {
@@ -40,8 +35,6 @@ namespace BookingApp.Controllers
                 return BadRequest("User not found");
 
             }
-
-
             var loginResult = await _signInManager.CheckPasswordSignInAsync(user, loginModel.Password, false);
             if (!loginResult.Succeeded)
             {
@@ -55,10 +48,8 @@ namespace BookingApp.Controllers
                 LastActive = user.LastActive,
                 Country = user.Country,
                 Token = await _tokenService.CreateToken(user)
-
             };
         }
-
         [HttpPost("register")]
         public async Task<ActionResult<RegisterModel>> Register([FromBody] RegisterModel registerModel)
         {
@@ -74,7 +65,7 @@ namespace BookingApp.Controllers
             {
                 var _token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 // "Users" is the controller
-                var confirmationLink = Url.Action("ValidateEmail", "Users", new { userId = user.Id, token = _token }, Request.Scheme);
+                var confirmationLink = Url.Action("ValidateEmail", "Users", new { email = registerModel.EMail, token = _token }, Request.Scheme);
                 await _mailSender.SendEmailAsync(registerModel.EMail, "E-mail Verification", confirmationLink);
                 if (_token == null || confirmationLink == null)
                 {
@@ -88,19 +79,16 @@ namespace BookingApp.Controllers
 
             }
             return BadRequest("Failed to register, check the supplied information");
-
-
         }
-
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult> ValidateEmail([FromQuery] string userId, string token)
+        public async Task<ActionResult> ValidateEmail([FromQuery] string email, string token)
         {
-            if (userId == null || token == null)
+            if (email == null || token == null)
             {
-                return BadRequest("Token or UserId is not found");
+                return BadRequest("Token or Email is not found");
             }
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
             {
                 return BadRequest("User not found");
@@ -111,33 +99,27 @@ namespace BookingApp.Controllers
                 return Ok("Your email has been Verified, You can close this page and login");
             }
             return BadRequest(result.Errors);
-
         }
-
-        [HttpPost("reset-password")]
-        public async Task<ActionResult> GenerateResetToken(string email)
+        [HttpPost("reset")]
+        public async Task<ActionResult> ResetPassword([FromBody] ResetModel resetModel)
         {
-
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.FindByEmailAsync(resetModel.Email);
             if (user == null)
             {
                 return BadRequest("User was not found");
             }
-            var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var confirmationLink = Url.Action("ValidateResetToken", "Users", new { email = user.Email, token = resetToken }, Request.Scheme);
-            var result = _mailSender.SendEmailAsync(email, "Password Reset", confirmationLink);
-            if (result.IsCompleted)
+            if (resetModel.Password != resetModel.ConfirmPassword)
             {
-                return Ok("Check your mails to confirm the request");
-
+                return BadRequest("Passwords do not match");
             }
-            return BadRequest("This could not be done");
-
+            var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var confirmationLink = Url.Action("ValidateResetToken", "Users", new { email = user.Email, token = resetToken, newPassword = resetModel.ConfirmPassword }, Request.Scheme);
+            await _mailSender.SendEmailAsync(resetModel.Email, "Password Reset", $"Please click on the link below to finalize your password change \n {confirmationLink}");
+            return Ok();
         }
-
-        [HttpGet]
+        [HttpGet("get-token")]
         [AllowAnonymous]
-        public async Task<ActionResult<string>> ValidateResetToken([FromQuery] string email, string token)
+        public async Task<ActionResult<string>> ValidateResetToken([FromQuery] string email, string token, string newPassword)
         {
 
             if (email == null || token == null)
@@ -147,11 +129,11 @@ namespace BookingApp.Controllers
             var user = await _userManager.FindByEmailAsync(email);
             if (user != null)
             {
-                return token;
+                await _userManager.ResetPasswordAsync(user, token, newPassword);
+                return Ok("Success, Your Password has been changed. Close this page and Log in");
             }
             return BadRequest("Could not reset your password");
         }
-
     }
 }
 
