@@ -26,7 +26,6 @@ C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Azure.Security.KeyVault.Certificates.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Azure.Security.KeyVault.Secrets.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Humanizer.dll
-C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\MailKit.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
@@ -47,12 +46,9 @@ C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Microsoft.OpenApi.dll
-C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\MimeKit.dll
-C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\NETCore.MailKit.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Npgsql.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
-C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\BouncyCastle.Crypto.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\SendGrid.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\StarkbankEcdsa.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
@@ -77,3 +73,6 @@ C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\obj\
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\obj\Debug\net5.0\ref\BookingApp.dll
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\obj\Debug\net5.0\BookingApp.pdb
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\obj\Debug\net5.0\BookingApp.genruntimeconfig.cache
+C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\Microsoft.Extensions.Logging.Abstractions.dll
