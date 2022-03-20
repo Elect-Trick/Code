@@ -13,7 +13,6 @@
     <DocumentationFile></DocumentationFile>
   </PropertyGroup>
   <Target Name="Start" AfterTargets="Publish">
-  <Exec Command="dotnet run" />
   <CallTarget Targets="Build"></CallTarget>
   </Target> 
   
