@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "Fit-G",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
