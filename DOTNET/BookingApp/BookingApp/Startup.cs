@@ -48,11 +48,11 @@ namespace BookingApp
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookingApp v1"));
             }
+            app.UseCors(corsPolicy => corsPolicy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4200"));
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(corsPolicy => corsPolicy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4200"));
 
             app.UseAuthentication();
 
