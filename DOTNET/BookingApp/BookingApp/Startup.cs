@@ -63,7 +63,7 @@ namespace BookingApp
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapFallbackToController("Index", "FallBack");
+                endpoints.MapFallbackToController("Index", "Fallback");
 
             });
         }
