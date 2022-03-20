@@ -76,3 +76,4 @@ C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\fit-g\tsconfig.app.json
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\fit-g\tsconfig.json
 C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\fit-g\tsconfig.spec.json
+C:\Users\Njabulo Majenje\Documents\GitHub\Code\DOTNET\BookingApp\BookingApp\bin\Debug\net5.0\libman.json
