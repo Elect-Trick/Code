@@ -1,0 +1,27 @@
+<ng-container>
+  <button
+    (click)="getInternalServerError()"
+    class="btn btn-outline-primary mr-3"
+  >
+    Test 500 Error
+  </button>
+  <button (click)="getBadRequestError()" class="btn btn-outline-primary mr-3">
+    Test 400 Error
+  </button>
+  <button (click)="getUnAuthorizedError()" class="btn btn-outline-primary mr-3">
+    Test 401 Error
+  </button>
+  <button (click)="getNotFoundError()" class="btn btn-outline-primary mr-3">
+    Test 404 Error
+  </button>
+  <button (click)="getValidationError()" class="btn btn-outline-primary mr-3">
+    Test 400 Validations Error
+  </button>
+
+  <div class="row mt-5" *ngIf="validationErrors.length>0">
+
+    <ul class="text-danger">
+<li *ngFor="let errors of validationErrors">{{errors}}</li>
+    </ul>
+  </div>
+</ng-container>
