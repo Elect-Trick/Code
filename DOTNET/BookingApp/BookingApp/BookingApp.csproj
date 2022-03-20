@@ -4,8 +4,13 @@
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>aspnet-BookingApp-FACB177A-C263-4CF0-BE5C-CE73A34219F6</UserSecretsId>
     <SourceFolder>"../"</SourceFolder>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
 
 
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
   <Target Name="Start" AfterTargets="Publish">
   <Exec Command="dotnet run" />
@@ -13,13 +18,7 @@
   </Target> 
   
   <Target Name="Build">
-  <MSBuild 
-  Projects="$(SourceFolder)\BookingApp.sln"
-  Properties="Configuration=Release"
-  Targets="Clean:Build"
-  StopOnFirstFailure ="true"
-  ContinueOnError ="false"
-  />
+  <MSBuild Projects="$(SourceFolder)\BookingApp.sln" Properties="Configuration=Release" Targets="Clean:Build" StopOnFirstFailure="true" ContinueOnError="false" />
   </Target>
 
   <ItemGroup>
