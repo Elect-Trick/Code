@@ -3,8 +3,23 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>aspnet-BookingApp-FACB177A-C263-4CF0-BE5C-CE73A34219F6</UserSecretsId>
+    <SourceFolder>"../"</SourceFolder>
+
 
   </PropertyGroup>
+  <Target Name="Start">
+  <CallTarget Targets="Build"></CallTarget>
+  </Target> 
+  
+  <Target Name="Build">
+  <MSBuild 
+  Projects="$(SourceFolder)\BookingApp.sln"
+  Properties="Configuration=Release"
+  Targets="Clean:Build"
+  StopOnFirstFailure ="true"
+  ContinueOnError ="false"
+  />
+  </Target>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
