@@ -1,7 +1,0 @@
-{
-  "name": "UdemyApp-BookingSystem",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
